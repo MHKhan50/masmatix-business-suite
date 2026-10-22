@@ -1,0 +1,20 @@
+{
+  "entity": "com.masmatix.suite.generated.pos.Supplier",
+  "note": "Invented sample data for demos. Not real people or businesses.",
+  "rows": [
+    {
+      "name": "Northfield Wholesale (sample)",
+      "contactName": "A. Reid",
+      "phone": "0141 000 0001",
+      "email": "orders@northfield.example",
+      "paymentTermsDays": 30
+    },
+    {
+      "name": "Canal Street Bakery (sample)",
+      "contactName": "S. Malik",
+      "phone": "0141 000 0002",
+      "email": "hello@canalbakery.example",
+      "paymentTermsDays": 7
+    }
+  ]
+}

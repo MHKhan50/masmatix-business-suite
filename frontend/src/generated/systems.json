@@ -1,0 +1,82 @@
+[
+  {
+    "system": "pos",
+    "title": "Shop POS",
+    "entities": [
+      {
+        "name": "Supplier",
+        "label": "Suppliers",
+        "path": "suppliers",
+        "api": "/api/pos/suppliers",
+        "fields": [
+          {
+            "name": "name",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "contactName",
+            "type": "string"
+          },
+          {
+            "name": "phone",
+            "type": "phone"
+          },
+          {
+            "name": "email",
+            "type": "email"
+          },
+          {
+            "name": "paymentTermsDays",
+            "type": "int",
+            "min": 0,
+            "max": 120
+          },
+          {
+            "name": "notes",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "name": "Customer",
+        "label": "Loyalty customers",
+        "path": "customers",
+        "api": "/api/pos/customers",
+        "fields": [
+          {
+            "name": "fullName",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "phone",
+            "type": "phone"
+          },
+          {
+            "name": "email",
+            "type": "email"
+          },
+          {
+            "name": "tier",
+            "type": "enum",
+            "values": [
+              "STANDARD",
+              "SILVER",
+              "GOLD"
+            ]
+          },
+          {
+            "name": "points",
+            "type": "int",
+            "min": 0
+          },
+          {
+            "name": "marketingOptIn",
+            "type": "bool"
+          }
+        ]
+      }
+    ]
+  }
+]

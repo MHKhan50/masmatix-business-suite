@@ -1,0 +1,20 @@
+{
+  "entity": "com.masmatix.suite.generated.pos.Customer",
+  "note": "Invented sample data for demos. Not real people or businesses.",
+  "rows": [
+    {
+      "fullName": "Sample Customer One",
+      "phone": "07000 000001",
+      "tier": "GOLD",
+      "points": 420,
+      "marketingOptIn": true
+    },
+    {
+      "fullName": "Sample Customer Two",
+      "email": "two@example.com",
+      "tier": "STANDARD",
+      "points": 15,
+      "marketingOptIn": false
+    }
+  ]
+}

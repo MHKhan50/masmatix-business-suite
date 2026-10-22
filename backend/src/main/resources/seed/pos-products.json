@@ -1,0 +1,138 @@
+{
+  "entity": "com.masmatix.suite.pos.Product",
+  "note": "Invented sample products. Barcodes use the 200-299 in-store prefix range, so they do not belong to any real product.",
+  "rows": [
+    {
+      "sku": "SKU-0001",
+      "barcode": "2000000000015",
+      "name": "Semi-skimmed milk 2L (sample)",
+      "category": "Dairy",
+      "unitPrice": "1.45",
+      "taxRate": "0.00",
+      "stockQty": 40,
+      "reorderLevel": 10,
+      "active": true
+    },
+    {
+      "sku": "SKU-0002",
+      "barcode": "2000000000022",
+      "name": "Free-range eggs x6 (sample)",
+      "category": "Dairy",
+      "unitPrice": "1.89",
+      "taxRate": "0.00",
+      "stockQty": 30,
+      "reorderLevel": 8,
+      "active": true
+    },
+    {
+      "sku": "SKU-0003",
+      "barcode": "2000000000039",
+      "name": "White sliced bread 800g (sample)",
+      "category": "Bakery",
+      "unitPrice": "1.10",
+      "taxRate": "0.00",
+      "stockQty": 25,
+      "reorderLevel": 6,
+      "active": true
+    },
+    {
+      "sku": "SKU-0004",
+      "barcode": "2000000000046",
+      "name": "Basmati rice 1kg (sample)",
+      "category": "Grocery",
+      "unitPrice": "2.35",
+      "taxRate": "0.00",
+      "stockQty": 18,
+      "reorderLevel": 5,
+      "active": true
+    },
+    {
+      "sku": "SKU-0005",
+      "barcode": "2000000000053",
+      "name": "Chickpeas tin 400g (sample)",
+      "category": "Grocery",
+      "unitPrice": "0.65",
+      "taxRate": "0.00",
+      "stockQty": 50,
+      "reorderLevel": 12,
+      "active": true
+    },
+    {
+      "sku": "SKU-0006",
+      "barcode": "2000000000060",
+      "name": "Orange juice 1L (sample)",
+      "category": "Drinks",
+      "unitPrice": "1.60",
+      "taxRate": "0.00",
+      "stockQty": 20,
+      "reorderLevel": 6,
+      "active": true
+    },
+    {
+      "sku": "SKU-0007",
+      "barcode": "2000000000077",
+      "name": "Sparkling water 500ml (sample)",
+      "category": "Drinks",
+      "unitPrice": "0.75",
+      "taxRate": "20.00",
+      "stockQty": 48,
+      "reorderLevel": 12,
+      "active": true
+    },
+    {
+      "sku": "SKU-0008",
+      "barcode": "2000000000084",
+      "name": "Cola can 330ml (sample)",
+      "category": "Drinks",
+      "unitPrice": "0.90",
+      "taxRate": "20.00",
+      "stockQty": 60,
+      "reorderLevel": 15,
+      "active": true
+    },
+    {
+      "sku": "SKU-0009",
+      "barcode": "2000000000091",
+      "name": "Salted crisps 150g (sample)",
+      "category": "Snacks",
+      "unitPrice": "1.25",
+      "taxRate": "20.00",
+      "stockQty": 22,
+      "reorderLevel": 6,
+      "active": true
+    },
+    {
+      "sku": "SKU-0010",
+      "barcode": "2000000000107",
+      "name": "Milk chocolate bar 100g (sample)",
+      "category": "Snacks",
+      "unitPrice": "1.30",
+      "taxRate": "20.00",
+      "stockQty": 3,
+      "reorderLevel": 6,
+      "active": true
+    },
+    {
+      "sku": "SKU-0011",
+      "barcode": "2000000000114",
+      "name": "Washing-up liquid 450ml (sample)",
+      "category": "Household",
+      "unitPrice": "1.15",
+      "taxRate": "20.00",
+      "stockQty": 12,
+      "reorderLevel": 4,
+      "active": true
+    },
+    {
+      "sku": "SKU-0012",
+      "barcode": "2000000000121",
+      "name": "AA batteries x4 (sample)",
+      "category": "Household",
+      "unitPrice": "3.99",
+      "taxRate": "20.00",
+      "stockQty": 2,
+      "reorderLevel": 3,
+      "active": true
+    }
+  ]
+}

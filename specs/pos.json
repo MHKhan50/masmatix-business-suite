@@ -1,0 +1,40 @@
+{
+  "system": "pos",
+  "title": "Shop POS",
+  "entities": [
+    {
+      "name": "Supplier",
+      "label": "Suppliers",
+      "path": "suppliers",
+      "fields": [
+        {"name": "name", "type": "string", "required": true},
+        {"name": "contactName", "type": "string"},
+        {"name": "phone", "type": "phone"},
+        {"name": "email", "type": "email"},
+        {"name": "paymentTermsDays", "type": "int", "min": 0, "max": 120},
+        {"name": "notes", "type": "text"}
+      ],
+      "samples": [
+        {"name": "Northfield Wholesale (sample)", "contactName": "A. Reid", "phone": "0141 000 0001", "email": "orders@northfield.example", "paymentTermsDays": 30},
+        {"name": "Canal Street Bakery (sample)", "contactName": "S. Malik", "phone": "0141 000 0002", "email": "hello@canalbakery.example", "paymentTermsDays": 7}
+      ]
+    },
+    {
+      "name": "Customer",
+      "label": "Loyalty customers",
+      "path": "customers",
+      "fields": [
+        {"name": "fullName", "type": "string", "required": true},
+        {"name": "phone", "type": "phone"},
+        {"name": "email", "type": "email"},
+        {"name": "tier", "type": "enum", "values": ["STANDARD", "SILVER", "GOLD"]},
+        {"name": "points", "type": "int", "min": 0},
+        {"name": "marketingOptIn", "type": "bool"}
+      ],
+      "samples": [
+        {"fullName": "Sample Customer One", "phone": "07000 000001", "tier": "GOLD", "points": 420, "marketingOptIn": true},
+        {"fullName": "Sample Customer Two", "email": "two@example.com", "tier": "STANDARD", "points": 15, "marketingOptIn": false}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: suite
+      POSTGRES_USER: suite
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-suite}
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U suite -d suite"]
+      interval: 5s
+      retries: 10
+
+  api:
+    build: ./backend
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_URL: jdbc:postgresql://db:5432/suite
+      DB_USER: suite
+      DB_PASSWORD: ${DB_PASSWORD:-suite}
+      APP_JWT_SECRET: ${APP_JWT_SECRET:?Set APP_JWT_SECRET in .env (see .env.example)}
+      APP_DEMO_PASSWORD: ${APP_DEMO_PASSWORD:?Set APP_DEMO_PASSWORD in .env}
+      APP_CURRENCY: ${APP_CURRENCY:-GBP}
+      APP_TIMEZONE: ${APP_TIMEZONE:-Europe/London}
+      APP_SHOP_NAME: ${APP_SHOP_NAME:-Corner Shop (demo)}
+    ports:
+      - "8080:8080"
+
+  web:
+    build: ./frontend
+    depends_on:
+      - api
+    ports:
+      - "3000:80"
+
+volumes:
+  dbdata:
