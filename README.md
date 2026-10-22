@@ -6,6 +6,12 @@ This repository rebuilds, from scratch, the kinds of systems our team has delive
 
 **Status:** the shared base and the **Shop POS** system are in place. The other systems are added step by step (see [Roadmap](#roadmap)).
 
+| Till screen | Printed receipt (PDF) |
+|---|---|
+| ![Till screen of the Shop POS](docs/images/till.png) | ![Receipt PDF for one cash sale](docs/images/receipt.png) |
+
+*Screenshots from a local run with the invented sample data.*
+
 ## What is in it
 
 | Part | Tech | What it does |
