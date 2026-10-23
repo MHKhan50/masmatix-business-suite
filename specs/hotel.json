@@ -7,9 +7,9 @@
       "label": "Rooms",
       "path": "rooms",
       "fields": [
-        {"name": "roomNumber", "type": "string", "required": true},
+        {"name": "roomNumber", "type": "string", "required": true, "unique": true},
         {"name": "roomType", "type": "enum", "values": ["SINGLE", "DOUBLE", "TWIN", "FAMILY", "SUITE"]},
-        {"name": "nightlyRate", "type": "decimal", "required": true, "min": "0.00"},
+        {"name": "nightlyRate", "type": "decimal", "required": true, "min": "1.00"},
         {"name": "maxGuests", "type": "int", "required": true, "min": 1, "max": 8},
         {"name": "active", "type": "bool"}
       ],

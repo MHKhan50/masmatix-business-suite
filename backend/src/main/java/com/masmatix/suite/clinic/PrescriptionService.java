@@ -49,6 +49,10 @@ public class PrescriptionService {
         p.setIssuedAt(clock.instant());
         p.setNotes(req.notes());
 
+        long distinct = req.items().stream().map(PrescriptionRequest.Item::medicineId).distinct().count();
+        if (distinct < req.items().size()) {
+            throw new BusinessRuleException("The same medicine is listed twice. Put it on one line with the total dose.");
+        }
         StringBuilder warnings = new StringBuilder();
         for (PrescriptionRequest.Item it : req.items()) {
             Medicine m = medicines.findById(it.medicineId())

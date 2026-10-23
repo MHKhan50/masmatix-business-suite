@@ -1,5 +1,6 @@
 package com.masmatix.suite.core.web;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -18,6 +19,12 @@ public class ApiExceptionHandler {
     @ExceptionHandler(BusinessRuleException.class)
     ProblemDetail rule(BusinessRuleException ex) {
         return ProblemDetail.forStatusAndDetail(HttpStatus.UNPROCESSABLE_ENTITY, ex.getMessage());
+    }
+
+    /** A unique value (e.g. room number, member code) that already exists. */
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    ProblemDetail conflict(DataIntegrityViolationException ex) {
+        return ProblemDetail.forStatusAndDetail(HttpStatus.CONFLICT, "A record with this value already exists");
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

@@ -172,6 +172,14 @@ class SuiteSystemsApiTest {
         assertThat(new String(pdf, 0, 5)).isEqualTo("%PDF-");
     }
 
+    @Test
+    void sameMedicineTwiceIsRejected() throws Exception {
+        Long paracetamol = medicineId("Paracetamol");
+        postJson("/api/clinic/prescriptions", "manager", Map.of("patientId", patientId("Sample Patient Two"),
+                        "items", List.of(item(paracetamol), item(paracetamol))))
+                .andExpect(status().isUnprocessableEntity());
+    }
+
     // ---------------------------------------------------------------- gym
 
     private Long planId(String name) {
@@ -257,6 +265,14 @@ class SuiteSystemsApiTest {
                 .param("from", d.toString()).param("to", d.plusDays(2).toString()).param("guests", "2")));
         assertThat(free.toString()).doesNotContain("\"roomNumber\":\"102\"").contains("\"roomNumber\":\"103\"")
                 .doesNotContain("\"roomNumber\":\"101\""); // 101 sleeps one
+    }
+
+    @Test
+    void roomNumberIsUniqueAndRateHasAFloor() throws Exception {
+        postJson("/api/hotel/rooms", "manager", Map.of("roomNumber", "101", "nightlyRate", 70, "maxGuests", 1))
+                .andExpect(status().isConflict());
+        postJson("/api/hotel/rooms", "manager", Map.of("roomNumber", "301", "nightlyRate", 0.14, "maxGuests", 1))
+                .andExpect(status().isBadRequest());
     }
 
     @Test

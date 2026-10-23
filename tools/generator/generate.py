@@ -70,6 +70,8 @@ def validate(spec: dict, fname: str) -> None:
             seen.add(fn)
             if ft not in FIELD_TYPES:
                 raise SpecError("%s: %s.%s has unknown type '%s'" % (fname, name, fn, ft))
+            if f.get("unique") and ft not in {"string", "email", "phone"}:
+                raise SpecError("%s: %s.%s 'unique' is only for string, email or phone" % (fname, name, fn))
             if ft == "enum" and not f.get("values"):
                 raise SpecError("%s: %s.%s enum needs 'values'" % (fname, name, fn))
         if not seen:
@@ -95,7 +97,8 @@ def java_field(f: dict) -> Tuple[List[str], str]:
         if t == "enum":
             ann.append('@Pattern(regexp = "^(%s)?$", message = "must be one of %s")'
                        % ("|".join(f["values"]), ", ".join(f["values"])))
-        ann.append("@Column(length = %d%s)" % (length, ", nullable = false" if required else ""))
+        ann.append("@Column(length = %d%s%s)" % (length, ", nullable = false" if required else "",
+                                                 ", unique = true" if f.get("unique") else ""))
     elif t == "int":
         jt = "Integer"
         if required:

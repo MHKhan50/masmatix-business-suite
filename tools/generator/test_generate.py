@@ -51,3 +51,23 @@ class GeneratorTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class UniqueFieldTest(unittest.TestCase):
+
+    def test_unique_string_gets_unique_column(self) -> None:
+        spec = json.loads(json.dumps(GOOD))
+        spec["entities"][0]["fields"][0]["unique"] = True
+        with tempfile.TemporaryDirectory() as d:
+            write_spec(Path(d), spec)
+            files = generate.build(Path(d))
+        entity = next(c for p, c in files.items() if p.name == "Room.java")
+        self.assertIn("@Column(length = 120, nullable = false, unique = true)", entity)
+
+    def test_unique_on_number_is_rejected(self) -> None:
+        spec = json.loads(json.dumps(GOOD))
+        spec["entities"][0]["fields"][1]["unique"] = True
+        with tempfile.TemporaryDirectory() as d:
+            write_spec(Path(d), spec)
+            with self.assertRaises(generate.SpecError):
+                generate.build(Path(d))

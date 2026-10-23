@@ -113,7 +113,8 @@
           {
             "name": "roomNumber",
             "type": "string",
-            "required": true
+            "required": true,
+            "unique": true
           },
           {
             "name": "roomType",
@@ -130,7 +131,7 @@
             "name": "nightlyRate",
             "type": "decimal",
             "required": true,
-            "min": "0.00"
+            "min": "1.00"
           },
           {
             "name": "maxGuests",

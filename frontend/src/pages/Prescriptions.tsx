@@ -21,6 +21,7 @@ export default function Prescriptions({ session }: { session: Session }) {
   const [notes, setNotes] = useState("");
   const [override, setOverride] = useState("");
   const [message, setMessage] = useState("");
+  const [failed, setFailed] = useState(false);
 
   const load = () => api<Prescription[]>("/api/clinic/prescriptions").then(setList).catch((e: Error) => setMessage(e.message));
   useEffect(() => {
@@ -44,6 +45,7 @@ export default function Prescriptions({ session }: { session: Session }) {
         }),
       });
       setMessage(`Saved ${rx.prescriptionNumber}`);
+      setFailed(false);
       setItems([{ ...blank }]);
       setNotes("");
       setOverride("");
@@ -51,6 +53,7 @@ export default function Prescriptions({ session }: { session: Session }) {
       openFile(`/api/clinic/prescriptions/${rx.id}/print.pdf`);
     } catch (e) {
       setMessage((e as Error).message);
+      setFailed(true);
     }
   }
 
@@ -94,7 +97,7 @@ export default function Prescriptions({ session }: { session: Session }) {
           </div>
         </form>
       )}
-      {message && <p className="muted">{message}</p>}
+      {message && <p className={failed ? "error" : "muted"}>{message}</p>}
       <div className="table-wrap">
         <table>
           <thead><tr><th>Number</th><th>Date</th><th>Patient</th><th>Medicines</th><th>Prescriber</th><th /></tr></thead>

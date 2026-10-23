@@ -123,7 +123,7 @@ export default function CrudPage({ entity, session }: { entity: EntityDef; sessi
               <tr key={r.id}>
                 <td>{r.id}</td>
                 {shown.map((f) => (
-                  <td key={f.name}>{f.type === "bool" ? (r[f.name] ? "Yes" : "No") : String(r[f.name] ?? "")}</td>
+                  <td key={f.name}>{f.type === "bool" ? (r[f.name] ? "Yes" : "No") : f.type === "decimal" && typeof r[f.name] === "number" ? (r[f.name] as number).toFixed(2) : String(r[f.name] ?? "")}</td>
                 ))}
                 <td className="row-actions">
                   {canWrite && <button className="link" onClick={() => setEditing(r)}>Edit</button>}

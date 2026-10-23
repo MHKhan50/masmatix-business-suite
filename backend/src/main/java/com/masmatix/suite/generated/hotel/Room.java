@@ -13,7 +13,7 @@ public class Room extends BaseEntity {
 
     @NotBlank
     @Size(max = 120)
-    @Column(length = 120, nullable = false)
+    @Column(length = 120, nullable = false, unique = true)
     private String roomNumber;
 
     @Size(max = 40)
@@ -22,7 +22,7 @@ public class Room extends BaseEntity {
     private String roomType;
 
     @NotNull
-    @DecimalMin("0.00")
+    @DecimalMin("1.00")
     @Column(precision = 12, scale = 2)
     private BigDecimal nightlyRate;
 
