@@ -1,0 +1,24 @@
+{
+  "entity": "com.masmatix.suite.generated.gym.MembershipPlan",
+  "note": "Invented sample data for demos. Not real people or businesses.",
+  "rows": [
+    {
+      "name": "Monthly (sample)",
+      "months": 1,
+      "fee": 29.99,
+      "offPeakOnly": false
+    },
+    {
+      "name": "Quarterly (sample)",
+      "months": 3,
+      "fee": 79.99,
+      "offPeakOnly": false
+    },
+    {
+      "name": "Annual (sample)",
+      "months": 12,
+      "fee": 279.0,
+      "offPeakOnly": false
+    }
+  ]
+}

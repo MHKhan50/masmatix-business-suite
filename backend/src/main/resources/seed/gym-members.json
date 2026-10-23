@@ -1,0 +1,9 @@
+{
+  "entity": "com.masmatix.suite.gym.GymMember",
+  "note": "Invented sample data for demos. Not real people.",
+  "rows": [
+    {"memberCode": "GYM-0001", "fullName": "Sample Member Active", "phone": "07000 000301", "planId": 3, "expiresOn": "2027-09-30", "frozen": false},
+    {"memberCode": "GYM-0002", "fullName": "Sample Member Expired", "phone": "07000 000302", "planId": 1, "expiresOn": "2026-09-30", "frozen": false},
+    {"memberCode": "GYM-0003", "fullName": "Sample Member Frozen", "phone": "07000 000303", "planId": 2, "expiresOn": "2027-01-31", "frozen": true}
+  ]
+}

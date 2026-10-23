@@ -1,11 +1,28 @@
 import { useState, type FormEvent } from "react";
 import { BrowserRouter, NavLink, Navigate, Route, Routes } from "react-router-dom";
 import { api, loadSession, saveSession, type Session } from "./lib/api";
-import { generatedSystems, productEntity } from "./lib/fields";
+import { generatedSystems, gymMemberEntity, productEntity } from "./lib/fields";
 import Audit from "./pages/Audit";
 import CrudPage from "./pages/CrudPage";
+import GymDesk from "./pages/GymDesk";
+import HotelDesk from "./pages/HotelDesk";
+import Prescriptions from "./pages/Prescriptions";
 import Sales from "./pages/Sales";
+import SalonDiary from "./pages/SalonDiary";
 import Till from "./pages/Till";
+
+/** Hand-written screens per system, listed above that system's generated record screens. */
+const handWritten: Record<string, { path: string; label: string }[]> = {
+  pos: [{ path: "till", label: "Till" }, { path: "products", label: "Products" }, { path: "sales", label: "Sales" }],
+  salon: [{ path: "diary", label: "Diary" }],
+  clinic: [{ path: "prescriptions", label: "Prescriptions" }],
+  gym: [{ path: "desk", label: "Front desk" }, { path: "members", label: "Members" }],
+  hotel: [{ path: "desk", label: "Front desk" }],
+};
+const order = Object.keys(handWritten);
+const systems = [...generatedSystems].sort(
+  (a, b) => (order.indexOf(a.system) + 1 || 99) - (order.indexOf(b.system) + 1 || 99),
+);
 
 function Login({ onLogin }: { onLogin: (s: Session) => void }) {
   const [username, setUsername] = useState("staff");
@@ -54,15 +71,17 @@ export default function App() {
       <div className="shell">
         <nav>
           <div className="brand">Masmatix<span>Business Suite</span></div>
-          <p className="group">Shop POS</p>
-          <NavLink to="/pos/till">Till</NavLink>
-          <NavLink to="/pos/products">Products</NavLink>
-          <NavLink to="/pos/sales">Sales</NavLink>
-          {generatedSystems.map((sys) =>
-            sys.entities.map((e) => (
-              <NavLink key={e.api} to={`/${sys.system}/${e.path}`}>{e.label}</NavLink>
-            )),
-          )}
+          {systems.map((sys) => (
+            <div key={sys.system}>
+              <p className="group">{sys.title}</p>
+              {(handWritten[sys.system] ?? []).map((h) => (
+                <NavLink key={h.path} to={`/${sys.system}/${h.path}`}>{h.label}</NavLink>
+              ))}
+              {sys.entities.map((e) => (
+                <NavLink key={e.api} to={`/${sys.system}/${e.path}`}>{e.label}</NavLink>
+              ))}
+            </div>
+          ))}
           {session.role === "ADMIN" && (
             <>
               <p className="group">Admin</p>
@@ -79,6 +98,11 @@ export default function App() {
             <Route path="/pos/till" element={<Till />} />
             <Route path="/pos/products" element={<CrudPage entity={productEntity} session={session} />} />
             <Route path="/pos/sales" element={<Sales session={session} />} />
+            <Route path="/salon/diary" element={<SalonDiary />} />
+            <Route path="/clinic/prescriptions" element={<Prescriptions session={session} />} />
+            <Route path="/gym/desk" element={<GymDesk />} />
+            <Route path="/gym/members" element={<CrudPage entity={gymMemberEntity} session={session} />} />
+            <Route path="/hotel/desk" element={<HotelDesk session={session} />} />
             {generatedSystems.map((sys) =>
               sys.entities.map((e) => (
                 <Route key={e.api} path={`/${sys.system}/${e.path}`} element={<CrudPage entity={e} session={session} />} />

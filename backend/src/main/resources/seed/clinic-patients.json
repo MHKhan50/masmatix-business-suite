@@ -1,0 +1,18 @@
+{
+  "entity": "com.masmatix.suite.generated.clinic.Patient",
+  "note": "Invented sample data for demos. Not real people or businesses.",
+  "rows": [
+    {
+      "fullName": "Sample Patient One",
+      "dateOfBirth": "1980-04-12",
+      "phone": "07000 000201",
+      "allergies": "Penicillin"
+    },
+    {
+      "fullName": "Sample Patient Two",
+      "dateOfBirth": "1995-09-30",
+      "phone": "07000 000202",
+      "allergies": ""
+    }
+  ]
+}

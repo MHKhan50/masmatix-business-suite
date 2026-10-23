@@ -1,0 +1,24 @@
+{
+  "entity": "com.masmatix.suite.generated.salon.Stylist",
+  "note": "Invented sample data for demos. Not real people or businesses.",
+  "rows": [
+    {
+      "fullName": "Sample Stylist Amna",
+      "phone": "07000 000101",
+      "skills": "cuts, colour",
+      "active": true
+    },
+    {
+      "fullName": "Sample Stylist Ben",
+      "phone": "07000 000102",
+      "skills": "cuts, beard trims",
+      "active": true
+    },
+    {
+      "fullName": "Sample Therapist Chloe",
+      "phone": "07000 000103",
+      "skills": "facials, massage",
+      "active": true
+    }
+  ]
+}

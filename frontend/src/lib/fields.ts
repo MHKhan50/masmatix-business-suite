@@ -49,3 +49,19 @@ export const productEntity: EntityDef = {
 
 export const labelOf = (name: string) =>
   name.replace(/([A-Z])/g, " $1").replace(/^./, (c) => c.toUpperCase());
+
+/** Hand-written gym member module (renewal and entry rules live in the API), shown with the generic screen. */
+export const gymMemberEntity: EntityDef = {
+  name: "GymMember",
+  label: "Members",
+  path: "members",
+  api: "/api/gym/members",
+  fields: [
+    { name: "memberCode", type: "string", required: true },
+    { name: "fullName", type: "string", required: true },
+    { name: "phone", type: "phone" },
+    { name: "email", type: "email" },
+    { name: "expiresOn", type: "date" },
+    { name: "frozen", type: "bool" },
+  ],
+};

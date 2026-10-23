@@ -1,0 +1,22 @@
+{
+  "system": "gym",
+  "title": "Gym",
+  "entities": [
+    {
+      "name": "MembershipPlan",
+      "label": "Plans",
+      "path": "plans",
+      "fields": [
+        {"name": "name", "type": "string", "required": true},
+        {"name": "months", "type": "int", "required": true, "min": 1, "max": 24},
+        {"name": "fee", "type": "decimal", "required": true, "min": "0.00"},
+        {"name": "offPeakOnly", "type": "bool"}
+      ],
+      "samples": [
+        {"name": "Monthly (sample)", "months": 1, "fee": 29.99, "offPeakOnly": false},
+        {"name": "Quarterly (sample)", "months": 3, "fee": 79.99, "offPeakOnly": false},
+        {"name": "Annual (sample)", "months": 12, "fee": 279.00, "offPeakOnly": false}
+      ]
+    }
+  ]
+}

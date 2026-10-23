@@ -1,0 +1,30 @@
+{
+  "entity": "com.masmatix.suite.generated.clinic.Medicine",
+  "note": "Invented sample data for demos. Not real people or businesses.",
+  "rows": [
+    {
+      "name": "Paracetamol (sample)",
+      "strength": "500 mg",
+      "form": "TABLET",
+      "ingredient": "paracetamol"
+    },
+    {
+      "name": "Ibuprofen (sample)",
+      "strength": "200 mg",
+      "form": "TABLET",
+      "ingredient": "ibuprofen"
+    },
+    {
+      "name": "Amoxicillin (sample)",
+      "strength": "250 mg",
+      "form": "CAPSULE",
+      "ingredient": "penicillin"
+    },
+    {
+      "name": "Cetirizine (sample)",
+      "strength": "10 mg",
+      "form": "TABLET",
+      "ingredient": "cetirizine"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "system": "salon",
+  "title": "Salon and spa",
+  "entities": [
+    {
+      "name": "Stylist",
+      "label": "Stylists",
+      "path": "stylists",
+      "fields": [
+        {"name": "fullName", "type": "string", "required": true},
+        {"name": "phone", "type": "phone"},
+        {"name": "skills", "type": "text"},
+        {"name": "active", "type": "bool"}
+      ],
+      "samples": [
+        {"fullName": "Sample Stylist Amna", "phone": "07000 000101", "skills": "cuts, colour", "active": true},
+        {"fullName": "Sample Stylist Ben", "phone": "07000 000102", "skills": "cuts, beard trims", "active": true},
+        {"fullName": "Sample Therapist Chloe", "phone": "07000 000103", "skills": "facials, massage", "active": true}
+      ]
+    },
+    {
+      "name": "Treatment",
+      "label": "Treatments",
+      "path": "treatments",
+      "fields": [
+        {"name": "name", "type": "string", "required": true},
+        {"name": "durationMinutes", "type": "int", "required": true, "min": 15, "max": 480},
+        {"name": "price", "type": "decimal", "required": true, "min": "0.00"},
+        {"name": "category", "type": "enum", "values": ["HAIR", "BEAUTY", "SPA"]}
+      ],
+      "samples": [
+        {"name": "Cut and blow-dry (sample)", "durationMinutes": 45, "price": 32.00, "category": "HAIR"},
+        {"name": "Full colour (sample)", "durationMinutes": 120, "price": 85.00, "category": "HAIR"},
+        {"name": "Beard trim (sample)", "durationMinutes": 15, "price": 12.00, "category": "HAIR"},
+        {"name": "Express facial (sample)", "durationMinutes": 30, "price": 35.00, "category": "BEAUTY"},
+        {"name": "Back massage (sample)", "durationMinutes": 60, "price": 55.00, "category": "SPA"}
+      ]
+    }
+  ]
+}

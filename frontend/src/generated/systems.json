@@ -1,5 +1,153 @@
 [
   {
+    "system": "clinic",
+    "title": "Clinic",
+    "entities": [
+      {
+        "name": "Patient",
+        "label": "Patients",
+        "path": "patients",
+        "api": "/api/clinic/patients",
+        "fields": [
+          {
+            "name": "fullName",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "dateOfBirth",
+            "type": "date",
+            "required": true
+          },
+          {
+            "name": "phone",
+            "type": "phone"
+          },
+          {
+            "name": "allergies",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "name": "Medicine",
+        "label": "Medicines",
+        "path": "medicines",
+        "api": "/api/clinic/medicines",
+        "fields": [
+          {
+            "name": "name",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "strength",
+            "type": "string"
+          },
+          {
+            "name": "form",
+            "type": "enum",
+            "values": [
+              "TABLET",
+              "CAPSULE",
+              "SYRUP",
+              "CREAM",
+              "DROPS",
+              "INHALER"
+            ]
+          },
+          {
+            "name": "ingredient",
+            "type": "string"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "system": "gym",
+    "title": "Gym",
+    "entities": [
+      {
+        "name": "MembershipPlan",
+        "label": "Plans",
+        "path": "plans",
+        "api": "/api/gym/plans",
+        "fields": [
+          {
+            "name": "name",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "months",
+            "type": "int",
+            "required": true,
+            "min": 1,
+            "max": 24
+          },
+          {
+            "name": "fee",
+            "type": "decimal",
+            "required": true,
+            "min": "0.00"
+          },
+          {
+            "name": "offPeakOnly",
+            "type": "bool"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "system": "hotel",
+    "title": "Hotel",
+    "entities": [
+      {
+        "name": "Room",
+        "label": "Rooms",
+        "path": "rooms",
+        "api": "/api/hotel/rooms",
+        "fields": [
+          {
+            "name": "roomNumber",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "roomType",
+            "type": "enum",
+            "values": [
+              "SINGLE",
+              "DOUBLE",
+              "TWIN",
+              "FAMILY",
+              "SUITE"
+            ]
+          },
+          {
+            "name": "nightlyRate",
+            "type": "decimal",
+            "required": true,
+            "min": "0.00"
+          },
+          {
+            "name": "maxGuests",
+            "type": "int",
+            "required": true,
+            "min": 1,
+            "max": 8
+          },
+          {
+            "name": "active",
+            "type": "bool"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "system": "pos",
     "title": "Shop POS",
     "entities": [
@@ -74,6 +222,72 @@
           {
             "name": "marketingOptIn",
             "type": "bool"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "system": "salon",
+    "title": "Salon and spa",
+    "entities": [
+      {
+        "name": "Stylist",
+        "label": "Stylists",
+        "path": "stylists",
+        "api": "/api/salon/stylists",
+        "fields": [
+          {
+            "name": "fullName",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "phone",
+            "type": "phone"
+          },
+          {
+            "name": "skills",
+            "type": "text"
+          },
+          {
+            "name": "active",
+            "type": "bool"
+          }
+        ]
+      },
+      {
+        "name": "Treatment",
+        "label": "Treatments",
+        "path": "treatments",
+        "api": "/api/salon/treatments",
+        "fields": [
+          {
+            "name": "name",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "durationMinutes",
+            "type": "int",
+            "required": true,
+            "min": 15,
+            "max": 480
+          },
+          {
+            "name": "price",
+            "type": "decimal",
+            "required": true,
+            "min": "0.00"
+          },
+          {
+            "name": "category",
+            "type": "enum",
+            "values": [
+              "HAIR",
+              "BEAUTY",
+              "SPA"
+            ]
           }
         ]
       }

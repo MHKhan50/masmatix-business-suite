@@ -1,0 +1,25 @@
+{
+  "system": "hotel",
+  "title": "Hotel",
+  "entities": [
+    {
+      "name": "Room",
+      "label": "Rooms",
+      "path": "rooms",
+      "fields": [
+        {"name": "roomNumber", "type": "string", "required": true},
+        {"name": "roomType", "type": "enum", "values": ["SINGLE", "DOUBLE", "TWIN", "FAMILY", "SUITE"]},
+        {"name": "nightlyRate", "type": "decimal", "required": true, "min": "0.00"},
+        {"name": "maxGuests", "type": "int", "required": true, "min": 1, "max": 8},
+        {"name": "active", "type": "bool"}
+      ],
+      "samples": [
+        {"roomNumber": "101", "roomType": "SINGLE", "nightlyRate": 65.00, "maxGuests": 1, "active": true},
+        {"roomNumber": "102", "roomType": "DOUBLE", "nightlyRate": 85.00, "maxGuests": 2, "active": true},
+        {"roomNumber": "103", "roomType": "TWIN", "nightlyRate": 85.00, "maxGuests": 2, "active": true},
+        {"roomNumber": "201", "roomType": "FAMILY", "nightlyRate": 120.00, "maxGuests": 4, "active": true},
+        {"roomNumber": "202", "roomType": "SUITE", "nightlyRate": 160.00, "maxGuests": 2, "active": true}
+      ]
+    }
+  ]
+}

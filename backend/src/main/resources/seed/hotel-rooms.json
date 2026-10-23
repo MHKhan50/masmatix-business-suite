@@ -1,0 +1,41 @@
+{
+  "entity": "com.masmatix.suite.generated.hotel.Room",
+  "note": "Invented sample data for demos. Not real people or businesses.",
+  "rows": [
+    {
+      "roomNumber": "101",
+      "roomType": "SINGLE",
+      "nightlyRate": 65.0,
+      "maxGuests": 1,
+      "active": true
+    },
+    {
+      "roomNumber": "102",
+      "roomType": "DOUBLE",
+      "nightlyRate": 85.0,
+      "maxGuests": 2,
+      "active": true
+    },
+    {
+      "roomNumber": "103",
+      "roomType": "TWIN",
+      "nightlyRate": 85.0,
+      "maxGuests": 2,
+      "active": true
+    },
+    {
+      "roomNumber": "201",
+      "roomType": "FAMILY",
+      "nightlyRate": 120.0,
+      "maxGuests": 4,
+      "active": true
+    },
+    {
+      "roomNumber": "202",
+      "roomType": "SUITE",
+      "nightlyRate": 160.0,
+      "maxGuests": 2,
+      "active": true
+    }
+  ]
+}

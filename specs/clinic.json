@@ -1,0 +1,38 @@
+{
+  "system": "clinic",
+  "title": "Clinic",
+  "entities": [
+    {
+      "name": "Patient",
+      "label": "Patients",
+      "path": "patients",
+      "fields": [
+        {"name": "fullName", "type": "string", "required": true},
+        {"name": "dateOfBirth", "type": "date", "required": true},
+        {"name": "phone", "type": "phone"},
+        {"name": "allergies", "type": "text"}
+      ],
+      "samples": [
+        {"fullName": "Sample Patient One", "dateOfBirth": "1980-04-12", "phone": "07000 000201", "allergies": "Penicillin"},
+        {"fullName": "Sample Patient Two", "dateOfBirth": "1995-09-30", "phone": "07000 000202", "allergies": ""}
+      ]
+    },
+    {
+      "name": "Medicine",
+      "label": "Medicines",
+      "path": "medicines",
+      "fields": [
+        {"name": "name", "type": "string", "required": true},
+        {"name": "strength", "type": "string"},
+        {"name": "form", "type": "enum", "values": ["TABLET", "CAPSULE", "SYRUP", "CREAM", "DROPS", "INHALER"]},
+        {"name": "ingredient", "type": "string"}
+      ],
+      "samples": [
+        {"name": "Paracetamol (sample)", "strength": "500 mg", "form": "TABLET", "ingredient": "paracetamol"},
+        {"name": "Ibuprofen (sample)", "strength": "200 mg", "form": "TABLET", "ingredient": "ibuprofen"},
+        {"name": "Amoxicillin (sample)", "strength": "250 mg", "form": "CAPSULE", "ingredient": "penicillin"},
+        {"name": "Cetirizine (sample)", "strength": "10 mg", "form": "TABLET", "ingredient": "cetirizine"}
+      ]
+    }
+  ]
+}

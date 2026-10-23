@@ -1,0 +1,36 @@
+{
+  "entity": "com.masmatix.suite.generated.salon.Treatment",
+  "note": "Invented sample data for demos. Not real people or businesses.",
+  "rows": [
+    {
+      "name": "Cut and blow-dry (sample)",
+      "durationMinutes": 45,
+      "price": 32.0,
+      "category": "HAIR"
+    },
+    {
+      "name": "Full colour (sample)",
+      "durationMinutes": 120,
+      "price": 85.0,
+      "category": "HAIR"
+    },
+    {
+      "name": "Beard trim (sample)",
+      "durationMinutes": 15,
+      "price": 12.0,
+      "category": "HAIR"
+    },
+    {
+      "name": "Express facial (sample)",
+      "durationMinutes": 30,
+      "price": 35.0,
+      "category": "BEAUTY"
+    },
+    {
+      "name": "Back massage (sample)",
+      "durationMinutes": 60,
+      "price": 55.0,
+      "category": "SPA"
+    }
+  ]
+}
