@@ -1,0 +1,24 @@
+{
+  "entity": "com.masmatix.suite.generated.bakery.BakeryItem",
+  "note": "Invented sample data for demos. Not real people or businesses.",
+  "rows": [
+    {
+      "name": "White loaf (sample)",
+      "price": 1.4,
+      "shelfLifeDays": 3,
+      "category": "BREAD"
+    },
+    {
+      "name": "Gulab jamun box (sample)",
+      "price": 6.0,
+      "shelfLifeDays": 5,
+      "category": "SWEETS"
+    },
+    {
+      "name": "Chicken patty (sample)",
+      "price": 1.2,
+      "shelfLifeDays": 2,
+      "category": "SAVOURY"
+    }
+  ]
+}

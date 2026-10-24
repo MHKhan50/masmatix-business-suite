@@ -1,0 +1,113 @@
+{
+  "system": "lab",
+  "title": "Diagnostic lab",
+  "entities": [
+    {
+      "name": "LabTest",
+      "label": "Tests",
+      "path": "tests",
+      "fields": [
+        {
+          "name": "code",
+          "type": "string",
+          "required": true,
+          "unique": true,
+          "max": 20
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "sampleType",
+          "type": "enum",
+          "values": [
+            "BLOOD",
+            "URINE",
+            "SWAB",
+            "OTHER"
+          ]
+        },
+        {
+          "name": "normalRange",
+          "type": "string"
+        },
+        {
+          "name": "price",
+          "type": "decimal",
+          "min": "0.00"
+        }
+      ],
+      "samples": [
+        {
+          "code": "T-HB",
+          "name": "Haemoglobin (sample)",
+          "sampleType": "BLOOD",
+          "normalRange": "see lab reference (sample)",
+          "price": 8.0
+        },
+        {
+          "code": "T-GLU",
+          "name": "Fasting glucose (sample)",
+          "sampleType": "BLOOD",
+          "normalRange": "see lab reference (sample)",
+          "price": 6.0
+        }
+      ]
+    },
+    {
+      "name": "LabOrder",
+      "label": "Lab orders",
+      "path": "orders",
+      "fields": [
+        {
+          "name": "orderNumber",
+          "type": "string",
+          "required": true,
+          "unique": true,
+          "max": 30
+        },
+        {
+          "name": "patientName",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "testCode",
+          "type": "string",
+          "required": true,
+          "max": 20
+        },
+        {
+          "name": "collectedOn",
+          "type": "date",
+          "required": true
+        },
+        {
+          "name": "status",
+          "type": "enum",
+          "values": [
+            "COLLECTED",
+            "IN_PROGRESS",
+            "REPORTED"
+          ]
+        },
+        {
+          "name": "result",
+          "type": "text"
+        }
+      ],
+      "samples": [
+        {
+          "orderNumber": "L-000451",
+          "patientName": "Sample Patient Three",
+          "testCode": "T-HB",
+          "collectedOn": "2026-10-23",
+          "status": "IN_PROGRESS",
+          "result": ""
+        }
+      ]
+    }
+  ]
+}

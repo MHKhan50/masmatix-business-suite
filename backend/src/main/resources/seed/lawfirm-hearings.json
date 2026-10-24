@@ -1,0 +1,12 @@
+{
+  "entity": "com.masmatix.suite.generated.lawfirm.Hearing",
+  "note": "Invented sample data for demos. Not real people or businesses.",
+  "rows": [
+    {
+      "caseNumber": "SAMPLE-CIV-2026-01",
+      "hearingOn": "2026-11-05",
+      "purpose": "Evidence (sample)",
+      "outcome": ""
+    }
+  ]
+}

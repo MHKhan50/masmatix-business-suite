@@ -1,0 +1,18 @@
+{
+  "entity": "com.masmatix.suite.generated.payroll.Employee",
+  "note": "Invented sample data for demos. Not real people or businesses.",
+  "rows": [
+    {
+      "employeeCode": "EMP-001",
+      "fullName": "Sample Employee One",
+      "monthlySalary": 1800.0,
+      "shiftStart": "09:00"
+    },
+    {
+      "employeeCode": "EMP-002",
+      "fullName": "Sample Employee Two",
+      "monthlySalary": 1650.0,
+      "shiftStart": "08:30"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "entity": "com.masmatix.suite.generated.library.BookLoan",
+  "note": "Invented sample data for demos. Not real people or businesses.",
+  "rows": [
+    {
+      "accessionNumber": "ACC-0001",
+      "borrower": "Sample Student One",
+      "issuedOn": "2026-10-10",
+      "dueOn": "2026-10-24",
+      "fine": 0.0
+    }
+  ]
+}

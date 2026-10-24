@@ -1,0 +1,14 @@
+{
+  "entity": "com.masmatix.suite.generated.garment.GarmentExchange",
+  "note": "Invented sample data for demos. Not real people or businesses.",
+  "rows": [
+    {
+      "receiptNumber": "R-000123",
+      "styleCode": "KRT-101-M-BLU",
+      "reason": "SIZE",
+      "exchangedOn": "2026-10-20",
+      "refundGiven": false,
+      "notes": "Swapped for size L (sample)"
+    }
+  ]
+}

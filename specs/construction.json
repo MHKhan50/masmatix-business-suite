@@ -1,0 +1,106 @@
+{
+  "system": "construction",
+  "title": "Construction materials",
+  "entities": [
+    {
+      "name": "SiteMaterial",
+      "label": "Materials",
+      "path": "materials",
+      "fields": [
+        {
+          "name": "site",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "material",
+          "type": "enum",
+          "required": true,
+          "values": [
+            "CEMENT",
+            "STEEL",
+            "SAND",
+            "BRICKS",
+            "CRUSH",
+            "OTHER"
+          ]
+        },
+        {
+          "name": "quantity",
+          "type": "decimal",
+          "required": true,
+          "min": "0.00"
+        },
+        {
+          "name": "unit",
+          "type": "string",
+          "max": 20
+        },
+        {
+          "name": "unitCost",
+          "type": "decimal",
+          "min": "0.00"
+        },
+        {
+          "name": "receivedOn",
+          "type": "date",
+          "required": true
+        }
+      ],
+      "samples": [
+        {
+          "site": "Sample Site A",
+          "material": "CEMENT",
+          "quantity": 200,
+          "unit": "bags",
+          "unitCost": 4.1,
+          "receivedOn": "2026-10-21"
+        },
+        {
+          "site": "Sample Site A",
+          "material": "STEEL",
+          "quantity": 1.5,
+          "unit": "tonnes",
+          "unitCost": 620.0,
+          "receivedOn": "2026-10-22"
+        }
+      ]
+    },
+    {
+      "name": "LabourDay",
+      "label": "Labour",
+      "path": "labour",
+      "fields": [
+        {
+          "name": "site",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "workDate",
+          "type": "date",
+          "required": true
+        },
+        {
+          "name": "workers",
+          "type": "int",
+          "required": true,
+          "min": 0
+        },
+        {
+          "name": "dailyRate",
+          "type": "decimal",
+          "min": "0.00"
+        }
+      ],
+      "samples": [
+        {
+          "site": "Sample Site A",
+          "workDate": "2026-10-23",
+          "workers": 14,
+          "dailyRate": 12.0
+        }
+      ]
+    }
+  ]
+}

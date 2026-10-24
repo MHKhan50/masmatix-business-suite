@@ -1,0 +1,105 @@
+{
+  "system": "bakery",
+  "title": "Bakery",
+  "entities": [
+    {
+      "name": "BakeryItem",
+      "label": "Bakery items",
+      "path": "items",
+      "fields": [
+        {
+          "name": "name",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "price",
+          "type": "decimal",
+          "required": true,
+          "min": "0.00"
+        },
+        {
+          "name": "shelfLifeDays",
+          "type": "int",
+          "required": true,
+          "min": 1,
+          "max": 60
+        },
+        {
+          "name": "category",
+          "type": "enum",
+          "values": [
+            "BREAD",
+            "CAKE",
+            "SWEETS",
+            "SAVOURY"
+          ]
+        }
+      ],
+      "samples": [
+        {
+          "name": "White loaf (sample)",
+          "price": 1.4,
+          "shelfLifeDays": 3,
+          "category": "BREAD"
+        },
+        {
+          "name": "Gulab jamun box (sample)",
+          "price": 6.0,
+          "shelfLifeDays": 5,
+          "category": "SWEETS"
+        },
+        {
+          "name": "Chicken patty (sample)",
+          "price": 1.2,
+          "shelfLifeDays": 2,
+          "category": "SAVOURY"
+        }
+      ]
+    },
+    {
+      "name": "ProductionBatch",
+      "label": "Production batches",
+      "path": "batches",
+      "fields": [
+        {
+          "name": "batchCode",
+          "type": "string",
+          "required": true,
+          "unique": true,
+          "max": 30
+        },
+        {
+          "name": "itemName",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "quantity",
+          "type": "int",
+          "required": true,
+          "min": 1
+        },
+        {
+          "name": "bakedOn",
+          "type": "date",
+          "required": true
+        },
+        {
+          "name": "expiresOn",
+          "type": "date",
+          "required": true
+        }
+      ],
+      "samples": [
+        {
+          "batchCode": "B-20261024-01",
+          "itemName": "White loaf (sample)",
+          "quantity": 40,
+          "bakedOn": "2026-10-24",
+          "expiresOn": "2026-10-27"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "entity": "com.masmatix.suite.generated.imei.WarrantyClaim",
+  "note": "Invented sample data for demos. Not real people or businesses.",
+  "rows": [
+    {
+      "imei": "000000000000017",
+      "fault": "Charging port loose (sample)",
+      "receivedOn": "2026-10-18",
+      "status": "SENT_TO_SERVICE"
+    }
+  ]
+}

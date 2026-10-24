@@ -1,0 +1,107 @@
+{
+  "system": "wholesale",
+  "title": "Wholesale distribution",
+  "entities": [
+    {
+      "name": "DeliveryRoute",
+      "label": "Routes",
+      "path": "routes",
+      "fields": [
+        {
+          "name": "name",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "rider",
+          "type": "string"
+        },
+        {
+          "name": "routeDay",
+          "type": "enum",
+          "values": [
+            "MON",
+            "TUE",
+            "WED",
+            "THU",
+            "FRI",
+            "SAT",
+            "SUN"
+          ]
+        },
+        {
+          "name": "shops",
+          "type": "int",
+          "min": 0
+        }
+      ],
+      "samples": [
+        {
+          "name": "North market route (sample)",
+          "rider": "Sample Rider One",
+          "routeDay": "MON",
+          "shops": 18
+        },
+        {
+          "name": "Canal road route (sample)",
+          "rider": "Sample Rider Two",
+          "routeDay": "THU",
+          "shops": 12
+        }
+      ]
+    },
+    {
+      "name": "AdvanceOrder",
+      "label": "Advance orders",
+      "path": "orders",
+      "fields": [
+        {
+          "name": "orderNumber",
+          "type": "string",
+          "required": true,
+          "unique": true,
+          "max": 30
+        },
+        {
+          "name": "shopName",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "routeName",
+          "type": "string"
+        },
+        {
+          "name": "deliveryOn",
+          "type": "date",
+          "required": true
+        },
+        {
+          "name": "amount",
+          "type": "decimal",
+          "min": "0.00"
+        },
+        {
+          "name": "status",
+          "type": "enum",
+          "values": [
+            "BOOKED",
+            "LOADED",
+            "DELIVERED",
+            "CANCELLED"
+          ]
+        }
+      ],
+      "samples": [
+        {
+          "orderNumber": "AO-7781",
+          "shopName": "Sample General Store",
+          "routeName": "North market route (sample)",
+          "deliveryOn": "2026-10-26",
+          "amount": 312.5,
+          "status": "BOOKED"
+        }
+      ]
+    }
+  ]
+}

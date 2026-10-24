@@ -1,0 +1,14 @@
+{
+  "entity": "com.masmatix.suite.generated.tailoring.TailoringCustomer",
+  "note": "Invented sample data for demos. Not real people or businesses.",
+  "rows": [
+    {
+      "fullName": "Sample Customer One",
+      "phone": "07000 000501",
+      "chestCm": 102.0,
+      "waistCm": 88.0,
+      "lengthCm": 104.0,
+      "notes": "Prefers loose fit (sample)"
+    }
+  ]
+}

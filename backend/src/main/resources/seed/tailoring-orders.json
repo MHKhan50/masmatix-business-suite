@@ -1,0 +1,16 @@
+{
+  "entity": "com.masmatix.suite.generated.tailoring.TailoringOrder",
+  "note": "Invented sample data for demos. Not real people or businesses.",
+  "rows": [
+    {
+      "orderNumber": "TL-0091",
+      "customerName": "Sample Customer One",
+      "garment": "Shalwar kameez (sample)",
+      "trialOn": "2026-10-28",
+      "deliveryOn": "2026-11-02",
+      "price": 45.0,
+      "advancePaid": 20.0,
+      "status": "STITCHING"
+    }
+  ]
+}

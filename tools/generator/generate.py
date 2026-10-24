@@ -32,6 +32,10 @@ NAME_RE = re.compile(r"^[a-z][a-zA-Z0-9]*$")
 ENTITY_RE = re.compile(r"^[A-Z][a-zA-Z0-9]*$")
 SYSTEM_RE = re.compile(r"^[a-z][a-z0-9]*$")
 PATH_RE = re.compile(r"^[a-z][a-z0-9-]*$")
+# Column names that break on PostgreSQL or the H2 test database.
+SQL_RESERVED = {"order", "user", "value", "key", "day", "month", "year", "hour", "minute", "second",
+                "limit", "group", "row", "rows", "table", "select", "from", "where", "end", "to"}
+HAND_WRITTEN = ROOT / "backend/src/main/java/com/masmatix/suite"
 
 
 class SpecError(ValueError):
@@ -63,7 +67,7 @@ def validate(spec: dict, fname: str) -> None:
         seen = set()
         for f in ent.get("fields", []):
             fn, ft = f.get("name", ""), f.get("type", "")
-            if not NAME_RE.match(fn) or fn in JAVA_KEYWORDS or fn in {"id", "createdAt", "updatedAt"}:
+            if not NAME_RE.match(fn) or fn in JAVA_KEYWORDS or fn.lower() in SQL_RESERVED or fn in {"id", "createdAt", "updatedAt"}:
                 raise SpecError("%s: %s field name '%s' is not allowed" % (fname, name, fn))
             if fn in seen:
                 raise SpecError("%s: %s has duplicate field '%s'" % (fname, name, fn))
@@ -176,16 +180,37 @@ def controller_java(system: str, ent: dict, spec_file: str) -> str:
 
 # ---------------------------------------------------------------- run
 
-def build(specs_dir: Path) -> Dict[Path, str]:
+def hand_written_entities(java_root: Path) -> Dict[str, str]:
+    """Class names of hand-written JPA entities (outside generated/), so specs cannot clash with them."""
+    found: Dict[str, str] = {}
+    for f in java_root.rglob("*.java"):
+        if "generated" in f.parts:
+            continue
+        text = f.read_text(encoding="utf-8")
+        if "@Entity" in text:
+            found[f.stem] = str(f.relative_to(java_root))
+    return found
+
+
+def build(specs_dir: Path, java_root: Path = HAND_WRITTEN) -> Dict[Path, str]:
     """Return {output path: content} for every file the specs produce."""
     out: Dict[Path, str] = {}
     systems = []
+    taken = {n: "hand-written %s" % p for n, p in hand_written_entities(java_root).items()} if java_root.exists() else {}
+    seen_systems = set()
     for spec_path in sorted(specs_dir.glob("*.json")):
         spec = json.loads(spec_path.read_text(encoding="utf-8"))
         validate(spec, spec_path.name)
         system = spec["system"]
+        if system in seen_systems:
+            raise SpecError("%s: system '%s' is defined twice" % (spec_path.name, system))
+        seen_systems.add(system)
         front_entities = []
         for ent in spec["entities"]:
+            # JPA entity names are global, so two classes with the same name clash even in different packages.
+            if ent["name"] in taken:
+                raise SpecError("%s: entity name '%s' is already used by %s" % (spec_path.name, ent["name"], taken[ent["name"]]))
+            taken[ent["name"]] = "specs/%s" % spec_path.name
             d = JAVA_ROOT / system
             out[d / ("%s.java" % ent["name"])] = entity_java(system, ent, spec_path.name)
             out[d / ("%sRepository.java" % ent["name"])] = repo_java(system, ent, spec_path.name)

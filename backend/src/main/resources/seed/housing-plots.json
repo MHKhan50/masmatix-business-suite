@@ -1,0 +1,20 @@
+{
+  "entity": "com.masmatix.suite.generated.housing.Plot",
+  "note": "Invented sample data for demos. Not real people or businesses.",
+  "rows": [
+    {
+      "plotNumber": "A-101",
+      "block": "A",
+      "sizeMarla": 5,
+      "status": "ALLOTTED",
+      "ownerName": "Sample Owner One"
+    },
+    {
+      "plotNumber": "A-102",
+      "block": "A",
+      "sizeMarla": 10,
+      "status": "AVAILABLE",
+      "ownerName": ""
+    }
+  ]
+}

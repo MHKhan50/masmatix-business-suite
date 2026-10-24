@@ -1,5 +1,83 @@
 [
   {
+    "system": "bakery",
+    "title": "Bakery",
+    "entities": [
+      {
+        "name": "BakeryItem",
+        "label": "Bakery items",
+        "path": "items",
+        "api": "/api/bakery/items",
+        "fields": [
+          {
+            "name": "name",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "price",
+            "type": "decimal",
+            "required": true,
+            "min": "0.00"
+          },
+          {
+            "name": "shelfLifeDays",
+            "type": "int",
+            "required": true,
+            "min": 1,
+            "max": 60
+          },
+          {
+            "name": "category",
+            "type": "enum",
+            "values": [
+              "BREAD",
+              "CAKE",
+              "SWEETS",
+              "SAVOURY"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "ProductionBatch",
+        "label": "Production batches",
+        "path": "batches",
+        "api": "/api/bakery/batches",
+        "fields": [
+          {
+            "name": "batchCode",
+            "type": "string",
+            "required": true,
+            "unique": true,
+            "max": 30
+          },
+          {
+            "name": "itemName",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "quantity",
+            "type": "int",
+            "required": true,
+            "min": 1
+          },
+          {
+            "name": "bakedOn",
+            "type": "date",
+            "required": true
+          },
+          {
+            "name": "expiresOn",
+            "type": "date",
+            "required": true
+          }
+        ]
+      }
+    ]
+  },
+  {
     "system": "clinic",
     "title": "Clinic",
     "entities": [
@@ -59,6 +137,250 @@
           {
             "name": "ingredient",
             "type": "string"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "system": "coaching",
+    "title": "Coaching centre",
+    "entities": [
+      {
+        "name": "StudyBatch",
+        "label": "Batches",
+        "path": "batches",
+        "api": "/api/coaching/batches",
+        "fields": [
+          {
+            "name": "name",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "subject",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "teacher",
+            "type": "string"
+          },
+          {
+            "name": "startsOn",
+            "type": "date"
+          },
+          {
+            "name": "monthlyFee",
+            "type": "decimal",
+            "required": true,
+            "min": "0.00"
+          }
+        ]
+      },
+      {
+        "name": "Student",
+        "label": "Students",
+        "path": "students",
+        "api": "/api/coaching/students",
+        "fields": [
+          {
+            "name": "fullName",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "batchName",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "phone",
+            "type": "phone"
+          },
+          {
+            "name": "feePaidUntil",
+            "type": "date"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "system": "construction",
+    "title": "Construction materials",
+    "entities": [
+      {
+        "name": "SiteMaterial",
+        "label": "Materials",
+        "path": "materials",
+        "api": "/api/construction/materials",
+        "fields": [
+          {
+            "name": "site",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "material",
+            "type": "enum",
+            "required": true,
+            "values": [
+              "CEMENT",
+              "STEEL",
+              "SAND",
+              "BRICKS",
+              "CRUSH",
+              "OTHER"
+            ]
+          },
+          {
+            "name": "quantity",
+            "type": "decimal",
+            "required": true,
+            "min": "0.00"
+          },
+          {
+            "name": "unit",
+            "type": "string",
+            "max": 20
+          },
+          {
+            "name": "unitCost",
+            "type": "decimal",
+            "min": "0.00"
+          },
+          {
+            "name": "receivedOn",
+            "type": "date",
+            "required": true
+          }
+        ]
+      },
+      {
+        "name": "LabourDay",
+        "label": "Labour",
+        "path": "labour",
+        "api": "/api/construction/labour",
+        "fields": [
+          {
+            "name": "site",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "workDate",
+            "type": "date",
+            "required": true
+          },
+          {
+            "name": "workers",
+            "type": "int",
+            "required": true,
+            "min": 0
+          },
+          {
+            "name": "dailyRate",
+            "type": "decimal",
+            "min": "0.00"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "system": "garment",
+    "title": "Garment shop",
+    "entities": [
+      {
+        "name": "GarmentItem",
+        "label": "Garments",
+        "path": "garments",
+        "api": "/api/garment/garments",
+        "fields": [
+          {
+            "name": "styleCode",
+            "type": "string",
+            "required": true,
+            "unique": true,
+            "max": 30
+          },
+          {
+            "name": "name",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "sizeLabel",
+            "type": "enum",
+            "values": [
+              "XS",
+              "S",
+              "M",
+              "L",
+              "XL",
+              "XXL"
+            ]
+          },
+          {
+            "name": "colour",
+            "type": "string",
+            "max": 40
+          },
+          {
+            "name": "price",
+            "type": "decimal",
+            "required": true,
+            "min": "0.00"
+          },
+          {
+            "name": "stock",
+            "type": "int",
+            "min": 0
+          }
+        ]
+      },
+      {
+        "name": "GarmentExchange",
+        "label": "Exchanges",
+        "path": "exchanges",
+        "api": "/api/garment/exchanges",
+        "fields": [
+          {
+            "name": "receiptNumber",
+            "type": "string",
+            "required": true,
+            "max": 30
+          },
+          {
+            "name": "styleCode",
+            "type": "string",
+            "required": true,
+            "max": 30
+          },
+          {
+            "name": "reason",
+            "type": "enum",
+            "required": true,
+            "values": [
+              "SIZE",
+              "COLOUR",
+              "FAULT",
+              "OTHER"
+            ]
+          },
+          {
+            "name": "exchangedOn",
+            "type": "date",
+            "required": true
+          },
+          {
+            "name": "refundGiven",
+            "type": "bool"
+          },
+          {
+            "name": "notes",
+            "type": "text"
           }
         ]
       }
@@ -143,6 +465,555 @@
           {
             "name": "active",
             "type": "bool"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "system": "housing",
+    "title": "Housing society",
+    "entities": [
+      {
+        "name": "Plot",
+        "label": "Plots",
+        "path": "plots",
+        "api": "/api/housing/plots",
+        "fields": [
+          {
+            "name": "plotNumber",
+            "type": "string",
+            "required": true,
+            "unique": true,
+            "max": 20
+          },
+          {
+            "name": "block",
+            "type": "string",
+            "max": 10
+          },
+          {
+            "name": "sizeMarla",
+            "type": "decimal",
+            "min": "0.00"
+          },
+          {
+            "name": "status",
+            "type": "enum",
+            "values": [
+              "AVAILABLE",
+              "ALLOTTED",
+              "TRANSFERRED"
+            ]
+          },
+          {
+            "name": "ownerName",
+            "type": "string"
+          }
+        ]
+      },
+      {
+        "name": "PlotInstalment",
+        "label": "Instalments",
+        "path": "instalments",
+        "api": "/api/housing/instalments",
+        "fields": [
+          {
+            "name": "plotNumber",
+            "type": "string",
+            "required": true,
+            "max": 20
+          },
+          {
+            "name": "dueOn",
+            "type": "date",
+            "required": true
+          },
+          {
+            "name": "amount",
+            "type": "decimal",
+            "required": true,
+            "min": "0.00"
+          },
+          {
+            "name": "paidOn",
+            "type": "date"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "system": "imei",
+    "title": "Mobile IMEI tracker",
+    "entities": [
+      {
+        "name": "Handset",
+        "label": "Handsets",
+        "path": "handsets",
+        "api": "/api/imei/handsets",
+        "fields": [
+          {
+            "name": "imei",
+            "type": "string",
+            "required": true,
+            "unique": true,
+            "max": 15
+          },
+          {
+            "name": "brand",
+            "type": "string",
+            "required": true,
+            "max": 40
+          },
+          {
+            "name": "model",
+            "type": "string",
+            "required": true,
+            "max": 60
+          },
+          {
+            "name": "soldOn",
+            "type": "date"
+          },
+          {
+            "name": "warrantyMonths",
+            "type": "int",
+            "min": 0,
+            "max": 36
+          },
+          {
+            "name": "customerPhone",
+            "type": "phone"
+          }
+        ]
+      },
+      {
+        "name": "WarrantyClaim",
+        "label": "Warranty claims",
+        "path": "claims",
+        "api": "/api/imei/claims",
+        "fields": [
+          {
+            "name": "imei",
+            "type": "string",
+            "required": true,
+            "max": 15
+          },
+          {
+            "name": "fault",
+            "type": "text",
+            "required": true
+          },
+          {
+            "name": "receivedOn",
+            "type": "date",
+            "required": true
+          },
+          {
+            "name": "status",
+            "type": "enum",
+            "values": [
+              "RECEIVED",
+              "SENT_TO_SERVICE",
+              "REPAIRED",
+              "RETURNED",
+              "REJECTED"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "system": "lab",
+    "title": "Diagnostic lab",
+    "entities": [
+      {
+        "name": "LabTest",
+        "label": "Tests",
+        "path": "tests",
+        "api": "/api/lab/tests",
+        "fields": [
+          {
+            "name": "code",
+            "type": "string",
+            "required": true,
+            "unique": true,
+            "max": 20
+          },
+          {
+            "name": "name",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "sampleType",
+            "type": "enum",
+            "values": [
+              "BLOOD",
+              "URINE",
+              "SWAB",
+              "OTHER"
+            ]
+          },
+          {
+            "name": "normalRange",
+            "type": "string"
+          },
+          {
+            "name": "price",
+            "type": "decimal",
+            "min": "0.00"
+          }
+        ]
+      },
+      {
+        "name": "LabOrder",
+        "label": "Lab orders",
+        "path": "orders",
+        "api": "/api/lab/orders",
+        "fields": [
+          {
+            "name": "orderNumber",
+            "type": "string",
+            "required": true,
+            "unique": true,
+            "max": 30
+          },
+          {
+            "name": "patientName",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "testCode",
+            "type": "string",
+            "required": true,
+            "max": 20
+          },
+          {
+            "name": "collectedOn",
+            "type": "date",
+            "required": true
+          },
+          {
+            "name": "status",
+            "type": "enum",
+            "values": [
+              "COLLECTED",
+              "IN_PROGRESS",
+              "REPORTED"
+            ]
+          },
+          {
+            "name": "result",
+            "type": "text"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "system": "lawfirm",
+    "title": "Law firm case diary",
+    "entities": [
+      {
+        "name": "LegalCase",
+        "label": "Cases",
+        "path": "cases",
+        "api": "/api/lawfirm/cases",
+        "fields": [
+          {
+            "name": "caseNumber",
+            "type": "string",
+            "required": true,
+            "unique": true,
+            "max": 40
+          },
+          {
+            "name": "title",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "court",
+            "type": "string"
+          },
+          {
+            "name": "clientName",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "status",
+            "type": "enum",
+            "values": [
+              "OPEN",
+              "ADJOURNED",
+              "DECIDED",
+              "CLOSED"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Hearing",
+        "label": "Hearings",
+        "path": "hearings",
+        "api": "/api/lawfirm/hearings",
+        "fields": [
+          {
+            "name": "caseNumber",
+            "type": "string",
+            "required": true,
+            "max": 40
+          },
+          {
+            "name": "hearingOn",
+            "type": "date",
+            "required": true
+          },
+          {
+            "name": "purpose",
+            "type": "string"
+          },
+          {
+            "name": "outcome",
+            "type": "text"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "system": "library",
+    "title": "Library",
+    "entities": [
+      {
+        "name": "Book",
+        "label": "Books",
+        "path": "books",
+        "api": "/api/library/books",
+        "fields": [
+          {
+            "name": "accessionNumber",
+            "type": "string",
+            "required": true,
+            "unique": true,
+            "max": 20
+          },
+          {
+            "name": "title",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "author",
+            "type": "string"
+          },
+          {
+            "name": "copies",
+            "type": "int",
+            "min": 0,
+            "max": 500
+          }
+        ]
+      },
+      {
+        "name": "BookLoan",
+        "label": "Loans",
+        "path": "loans",
+        "api": "/api/library/loans",
+        "fields": [
+          {
+            "name": "accessionNumber",
+            "type": "string",
+            "required": true,
+            "max": 20
+          },
+          {
+            "name": "borrower",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "issuedOn",
+            "type": "date",
+            "required": true
+          },
+          {
+            "name": "dueOn",
+            "type": "date",
+            "required": true
+          },
+          {
+            "name": "returnedOn",
+            "type": "date"
+          },
+          {
+            "name": "fine",
+            "type": "decimal",
+            "min": "0.00"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "system": "microfinance",
+    "title": "Micro-finance",
+    "entities": [
+      {
+        "name": "Loan",
+        "label": "Loans",
+        "path": "loans",
+        "api": "/api/microfinance/loans",
+        "fields": [
+          {
+            "name": "loanNumber",
+            "type": "string",
+            "required": true,
+            "unique": true,
+            "max": 20
+          },
+          {
+            "name": "borrowerName",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "principal",
+            "type": "decimal",
+            "required": true,
+            "min": "0.00"
+          },
+          {
+            "name": "monthlyInstalment",
+            "type": "decimal",
+            "required": true,
+            "min": "0.00"
+          },
+          {
+            "name": "months",
+            "type": "int",
+            "required": true,
+            "min": 1,
+            "max": 60
+          },
+          {
+            "name": "startsOn",
+            "type": "date",
+            "required": true
+          },
+          {
+            "name": "status",
+            "type": "enum",
+            "values": [
+              "ACTIVE",
+              "CLOSED",
+              "DEFAULTED"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "LoanRepayment",
+        "label": "Repayments",
+        "path": "repayments",
+        "api": "/api/microfinance/repayments",
+        "fields": [
+          {
+            "name": "loanNumber",
+            "type": "string",
+            "required": true,
+            "max": 20
+          },
+          {
+            "name": "paidOn",
+            "type": "date",
+            "required": true
+          },
+          {
+            "name": "amount",
+            "type": "decimal",
+            "required": true,
+            "min": "0.00"
+          },
+          {
+            "name": "penalty",
+            "type": "decimal",
+            "min": "0.00"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "system": "payroll",
+    "title": "Payroll and attendance",
+    "entities": [
+      {
+        "name": "Employee",
+        "label": "Employees",
+        "path": "employees",
+        "api": "/api/payroll/employees",
+        "fields": [
+          {
+            "name": "employeeCode",
+            "type": "string",
+            "required": true,
+            "unique": true,
+            "max": 20
+          },
+          {
+            "name": "fullName",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "monthlySalary",
+            "type": "decimal",
+            "min": "0.00"
+          },
+          {
+            "name": "shiftStart",
+            "type": "string",
+            "max": 5
+          }
+        ]
+      },
+      {
+        "name": "AttendanceEntry",
+        "label": "Attendance",
+        "path": "attendance",
+        "api": "/api/payroll/attendance",
+        "fields": [
+          {
+            "name": "employeeCode",
+            "type": "string",
+            "required": true,
+            "max": 20
+          },
+          {
+            "name": "workDate",
+            "type": "date",
+            "required": true
+          },
+          {
+            "name": "minutesLate",
+            "type": "int",
+            "min": 0
+          },
+          {
+            "name": "overtimeMinutes",
+            "type": "int",
+            "min": 0
+          },
+          {
+            "name": "fineAmount",
+            "type": "decimal",
+            "min": "0.00"
           }
         ]
       }
@@ -288,6 +1159,311 @@
               "HAIR",
               "BEAUTY",
               "SPA"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "system": "tailoring",
+    "title": "Tailoring",
+    "entities": [
+      {
+        "name": "TailoringCustomer",
+        "label": "Customers",
+        "path": "customers",
+        "api": "/api/tailoring/customers",
+        "fields": [
+          {
+            "name": "fullName",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "phone",
+            "type": "phone"
+          },
+          {
+            "name": "chestCm",
+            "type": "decimal",
+            "min": "0.00"
+          },
+          {
+            "name": "waistCm",
+            "type": "decimal",
+            "min": "0.00"
+          },
+          {
+            "name": "lengthCm",
+            "type": "decimal",
+            "min": "0.00"
+          },
+          {
+            "name": "notes",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "name": "TailoringOrder",
+        "label": "Orders",
+        "path": "orders",
+        "api": "/api/tailoring/orders",
+        "fields": [
+          {
+            "name": "orderNumber",
+            "type": "string",
+            "required": true,
+            "unique": true,
+            "max": 30
+          },
+          {
+            "name": "customerName",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "garment",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "trialOn",
+            "type": "date"
+          },
+          {
+            "name": "deliveryOn",
+            "type": "date"
+          },
+          {
+            "name": "price",
+            "type": "decimal",
+            "min": "0.00"
+          },
+          {
+            "name": "advancePaid",
+            "type": "decimal",
+            "min": "0.00"
+          },
+          {
+            "name": "status",
+            "type": "enum",
+            "values": [
+              "CUTTING",
+              "STITCHING",
+              "TRIAL",
+              "READY",
+              "DELIVERED"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "system": "travel",
+    "title": "Travel agency",
+    "entities": [
+      {
+        "name": "TravelBooking",
+        "label": "Bookings",
+        "path": "bookings",
+        "api": "/api/travel/bookings",
+        "fields": [
+          {
+            "name": "reference",
+            "type": "string",
+            "required": true,
+            "unique": true,
+            "max": 30
+          },
+          {
+            "name": "travellerName",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "tripType",
+            "type": "enum",
+            "required": true,
+            "values": [
+              "UMRAH",
+              "TOUR",
+              "FLIGHT"
+            ]
+          },
+          {
+            "name": "travelOn",
+            "type": "date"
+          },
+          {
+            "name": "passportReceived",
+            "type": "bool"
+          },
+          {
+            "name": "visaStatus",
+            "type": "enum",
+            "values": [
+              "NOT_STARTED",
+              "SUBMITTED",
+              "APPROVED",
+              "REFUSED"
+            ]
+          },
+          {
+            "name": "amount",
+            "type": "decimal",
+            "min": "0.00"
+          },
+          {
+            "name": "paid",
+            "type": "decimal",
+            "min": "0.00"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "system": "weighbridge",
+    "title": "Mill weighbridge",
+    "entities": [
+      {
+        "name": "WeighSlip",
+        "label": "Weigh slips",
+        "path": "slips",
+        "api": "/api/weighbridge/slips",
+        "fields": [
+          {
+            "name": "slipNumber",
+            "type": "string",
+            "required": true,
+            "unique": true,
+            "max": 30
+          },
+          {
+            "name": "vehicleNumber",
+            "type": "string",
+            "required": true,
+            "max": 20
+          },
+          {
+            "name": "material",
+            "type": "enum",
+            "required": true,
+            "values": [
+              "WHEAT",
+              "COTTON",
+              "YARN",
+              "MAIZE",
+              "OTHER"
+            ]
+          },
+          {
+            "name": "supplierName",
+            "type": "string"
+          },
+          {
+            "name": "grossKg",
+            "type": "int",
+            "required": true,
+            "min": 0
+          },
+          {
+            "name": "tareKg",
+            "type": "int",
+            "required": true,
+            "min": 0
+          },
+          {
+            "name": "weighedOn",
+            "type": "date",
+            "required": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "system": "wholesale",
+    "title": "Wholesale distribution",
+    "entities": [
+      {
+        "name": "DeliveryRoute",
+        "label": "Routes",
+        "path": "routes",
+        "api": "/api/wholesale/routes",
+        "fields": [
+          {
+            "name": "name",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "rider",
+            "type": "string"
+          },
+          {
+            "name": "routeDay",
+            "type": "enum",
+            "values": [
+              "MON",
+              "TUE",
+              "WED",
+              "THU",
+              "FRI",
+              "SAT",
+              "SUN"
+            ]
+          },
+          {
+            "name": "shops",
+            "type": "int",
+            "min": 0
+          }
+        ]
+      },
+      {
+        "name": "AdvanceOrder",
+        "label": "Advance orders",
+        "path": "orders",
+        "api": "/api/wholesale/orders",
+        "fields": [
+          {
+            "name": "orderNumber",
+            "type": "string",
+            "required": true,
+            "unique": true,
+            "max": 30
+          },
+          {
+            "name": "shopName",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "routeName",
+            "type": "string"
+          },
+          {
+            "name": "deliveryOn",
+            "type": "date",
+            "required": true
+          },
+          {
+            "name": "amount",
+            "type": "decimal",
+            "min": "0.00"
+          },
+          {
+            "name": "status",
+            "type": "enum",
+            "values": [
+              "BOOKED",
+              "LOADED",
+              "DELIVERED",
+              "CANCELLED"
             ]
           }
         ]

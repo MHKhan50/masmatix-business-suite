@@ -1,0 +1,22 @@
+{
+  "entity": "com.masmatix.suite.generated.construction.SiteMaterial",
+  "note": "Invented sample data for demos. Not real people or businesses.",
+  "rows": [
+    {
+      "site": "Sample Site A",
+      "material": "CEMENT",
+      "quantity": 200,
+      "unit": "bags",
+      "unitCost": 4.1,
+      "receivedOn": "2026-10-21"
+    },
+    {
+      "site": "Sample Site A",
+      "material": "STEEL",
+      "quantity": 1.5,
+      "unit": "tonnes",
+      "unitCost": 620.0,
+      "receivedOn": "2026-10-22"
+    }
+  ]
+}

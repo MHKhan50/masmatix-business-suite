@@ -1,0 +1,70 @@
+{
+  "system": "weighbridge",
+  "title": "Mill weighbridge",
+  "entities": [
+    {
+      "name": "WeighSlip",
+      "label": "Weigh slips",
+      "path": "slips",
+      "fields": [
+        {
+          "name": "slipNumber",
+          "type": "string",
+          "required": true,
+          "unique": true,
+          "max": 30
+        },
+        {
+          "name": "vehicleNumber",
+          "type": "string",
+          "required": true,
+          "max": 20
+        },
+        {
+          "name": "material",
+          "type": "enum",
+          "required": true,
+          "values": [
+            "WHEAT",
+            "COTTON",
+            "YARN",
+            "MAIZE",
+            "OTHER"
+          ]
+        },
+        {
+          "name": "supplierName",
+          "type": "string"
+        },
+        {
+          "name": "grossKg",
+          "type": "int",
+          "required": true,
+          "min": 0
+        },
+        {
+          "name": "tareKg",
+          "type": "int",
+          "required": true,
+          "min": 0
+        },
+        {
+          "name": "weighedOn",
+          "type": "date",
+          "required": true
+        }
+      ],
+      "samples": [
+        {
+          "slipNumber": "WB-010245",
+          "vehicleNumber": "SAMPLE-123",
+          "material": "WHEAT",
+          "supplierName": "Sample Grain Supplier",
+          "grossKg": 24850,
+          "tareKg": 9120,
+          "weighedOn": "2026-10-23"
+        }
+      ]
+    }
+  ]
+}

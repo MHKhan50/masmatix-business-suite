@@ -1,0 +1,92 @@
+{
+  "system": "coaching",
+  "title": "Coaching centre",
+  "entities": [
+    {
+      "name": "StudyBatch",
+      "label": "Batches",
+      "path": "batches",
+      "fields": [
+        {
+          "name": "name",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "subject",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "teacher",
+          "type": "string"
+        },
+        {
+          "name": "startsOn",
+          "type": "date"
+        },
+        {
+          "name": "monthlyFee",
+          "type": "decimal",
+          "required": true,
+          "min": "0.00"
+        }
+      ],
+      "samples": [
+        {
+          "name": "Evening Maths A (sample)",
+          "subject": "Mathematics",
+          "teacher": "Sample Teacher One",
+          "startsOn": "2026-09-01",
+          "monthlyFee": 40.0
+        },
+        {
+          "name": "Weekend Physics (sample)",
+          "subject": "Physics",
+          "teacher": "Sample Teacher Two",
+          "startsOn": "2026-09-06",
+          "monthlyFee": 35.0
+        }
+      ]
+    },
+    {
+      "name": "Student",
+      "label": "Students",
+      "path": "students",
+      "fields": [
+        {
+          "name": "fullName",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "batchName",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "phone",
+          "type": "phone"
+        },
+        {
+          "name": "feePaidUntil",
+          "type": "date"
+        }
+      ],
+      "samples": [
+        {
+          "fullName": "Sample Student One",
+          "batchName": "Evening Maths A (sample)",
+          "phone": "07000 000401",
+          "feePaidUntil": "2026-10-31"
+        },
+        {
+          "fullName": "Sample Student Two",
+          "batchName": "Weekend Physics (sample)",
+          "phone": "07000 000402",
+          "feePaidUntil": "2026-09-30"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "system": "travel",
+  "title": "Travel agency",
+  "entities": [
+    {
+      "name": "TravelBooking",
+      "label": "Bookings",
+      "path": "bookings",
+      "fields": [
+        {
+          "name": "reference",
+          "type": "string",
+          "required": true,
+          "unique": true,
+          "max": 30
+        },
+        {
+          "name": "travellerName",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "tripType",
+          "type": "enum",
+          "required": true,
+          "values": [
+            "UMRAH",
+            "TOUR",
+            "FLIGHT"
+          ]
+        },
+        {
+          "name": "travelOn",
+          "type": "date"
+        },
+        {
+          "name": "passportReceived",
+          "type": "bool"
+        },
+        {
+          "name": "visaStatus",
+          "type": "enum",
+          "values": [
+            "NOT_STARTED",
+            "SUBMITTED",
+            "APPROVED",
+            "REFUSED"
+          ]
+        },
+        {
+          "name": "amount",
+          "type": "decimal",
+          "min": "0.00"
+        },
+        {
+          "name": "paid",
+          "type": "decimal",
+          "min": "0.00"
+        }
+      ],
+      "samples": [
+        {
+          "reference": "TA-2026-014",
+          "travellerName": "Sample Traveller One",
+          "tripType": "UMRAH",
+          "travelOn": "2026-12-05",
+          "passportReceived": true,
+          "visaStatus": "SUBMITTED",
+          "amount": 1450.0,
+          "paid": 500.0
+        },
+        {
+          "reference": "TA-2026-015",
+          "travellerName": "Sample Traveller Two",
+          "tripType": "FLIGHT",
+          "travelOn": "2026-11-20",
+          "passportReceived": false,
+          "visaStatus": "NOT_STARTED",
+          "amount": 620.0,
+          "paid": 620.0
+        }
+      ]
+    }
+  ]
+}

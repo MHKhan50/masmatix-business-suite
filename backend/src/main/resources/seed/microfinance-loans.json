@@ -1,0 +1,15 @@
+{
+  "entity": "com.masmatix.suite.generated.microfinance.Loan",
+  "note": "Invented sample data for demos. Not real people or businesses.",
+  "rows": [
+    {
+      "loanNumber": "LN-0007",
+      "borrowerName": "Sample Borrower One",
+      "principal": 1200.0,
+      "monthlyInstalment": 100.0,
+      "months": 12,
+      "startsOn": "2026-06-01",
+      "status": "ACTIVE"
+    }
+  ]
+}

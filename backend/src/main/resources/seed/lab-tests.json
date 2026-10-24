@@ -1,0 +1,20 @@
+{
+  "entity": "com.masmatix.suite.generated.lab.LabTest",
+  "note": "Invented sample data for demos. Not real people or businesses.",
+  "rows": [
+    {
+      "code": "T-HB",
+      "name": "Haemoglobin (sample)",
+      "sampleType": "BLOOD",
+      "normalRange": "see lab reference (sample)",
+      "price": 8.0
+    },
+    {
+      "code": "T-GLU",
+      "name": "Fasting glucose (sample)",
+      "sampleType": "BLOOD",
+      "normalRange": "see lab reference (sample)",
+      "price": 6.0
+    }
+  ]
+}

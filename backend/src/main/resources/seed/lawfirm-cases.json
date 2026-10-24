@@ -1,0 +1,13 @@
+{
+  "entity": "com.masmatix.suite.generated.lawfirm.LegalCase",
+  "note": "Invented sample data for demos. Not real people or businesses.",
+  "rows": [
+    {
+      "caseNumber": "SAMPLE-CIV-2026-01",
+      "title": "Sample v Sample (invented)",
+      "court": "Sample Civil Court",
+      "clientName": "Sample Client One",
+      "status": "OPEN"
+    }
+  ]
+}

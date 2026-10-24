@@ -1,0 +1,30 @@
+{
+  "entity": "com.masmatix.suite.generated.garment.GarmentItem",
+  "note": "Invented sample data for demos. Not real people or businesses.",
+  "rows": [
+    {
+      "styleCode": "KRT-101-M-BLU",
+      "name": "Cotton kurta (sample)",
+      "sizeLabel": "M",
+      "colour": "Blue",
+      "price": 24.0,
+      "stock": 12
+    },
+    {
+      "styleCode": "KRT-101-L-BLU",
+      "name": "Cotton kurta (sample)",
+      "sizeLabel": "L",
+      "colour": "Blue",
+      "price": 24.0,
+      "stock": 8
+    },
+    {
+      "styleCode": "SHL-220-M-RED",
+      "name": "Printed shawl (sample)",
+      "sizeLabel": "M",
+      "colour": "Red",
+      "price": 18.5,
+      "stock": 5
+    }
+  ]
+}

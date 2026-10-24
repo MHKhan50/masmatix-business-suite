@@ -1,0 +1,14 @@
+{
+  "entity": "com.masmatix.suite.generated.lab.LabOrder",
+  "note": "Invented sample data for demos. Not real people or businesses.",
+  "rows": [
+    {
+      "orderNumber": "L-000451",
+      "patientName": "Sample Patient Three",
+      "testCode": "T-HB",
+      "collectedOn": "2026-10-23",
+      "status": "IN_PROGRESS",
+      "result": ""
+    }
+  ]
+}

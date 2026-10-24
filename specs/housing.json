@@ -1,0 +1,100 @@
+{
+  "system": "housing",
+  "title": "Housing society",
+  "entities": [
+    {
+      "name": "Plot",
+      "label": "Plots",
+      "path": "plots",
+      "fields": [
+        {
+          "name": "plotNumber",
+          "type": "string",
+          "required": true,
+          "unique": true,
+          "max": 20
+        },
+        {
+          "name": "block",
+          "type": "string",
+          "max": 10
+        },
+        {
+          "name": "sizeMarla",
+          "type": "decimal",
+          "min": "0.00"
+        },
+        {
+          "name": "status",
+          "type": "enum",
+          "values": [
+            "AVAILABLE",
+            "ALLOTTED",
+            "TRANSFERRED"
+          ]
+        },
+        {
+          "name": "ownerName",
+          "type": "string"
+        }
+      ],
+      "samples": [
+        {
+          "plotNumber": "A-101",
+          "block": "A",
+          "sizeMarla": 5,
+          "status": "ALLOTTED",
+          "ownerName": "Sample Owner One"
+        },
+        {
+          "plotNumber": "A-102",
+          "block": "A",
+          "sizeMarla": 10,
+          "status": "AVAILABLE",
+          "ownerName": ""
+        }
+      ]
+    },
+    {
+      "name": "PlotInstalment",
+      "label": "Instalments",
+      "path": "instalments",
+      "fields": [
+        {
+          "name": "plotNumber",
+          "type": "string",
+          "required": true,
+          "max": 20
+        },
+        {
+          "name": "dueOn",
+          "type": "date",
+          "required": true
+        },
+        {
+          "name": "amount",
+          "type": "decimal",
+          "required": true,
+          "min": "0.00"
+        },
+        {
+          "name": "paidOn",
+          "type": "date"
+        }
+      ],
+      "samples": [
+        {
+          "plotNumber": "A-101",
+          "dueOn": "2026-10-01",
+          "amount": 250.0,
+          "paidOn": "2026-10-03"
+        },
+        {
+          "plotNumber": "A-101",
+          "dueOn": "2026-11-01",
+          "amount": 250.0
+        }
+      ]
+    }
+  ]
+}

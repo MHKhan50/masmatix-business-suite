@@ -1,0 +1,132 @@
+{
+  "system": "garment",
+  "title": "Garment shop",
+  "entities": [
+    {
+      "name": "GarmentItem",
+      "label": "Garments",
+      "path": "garments",
+      "fields": [
+        {
+          "name": "styleCode",
+          "type": "string",
+          "required": true,
+          "unique": true,
+          "max": 30
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "sizeLabel",
+          "type": "enum",
+          "values": [
+            "XS",
+            "S",
+            "M",
+            "L",
+            "XL",
+            "XXL"
+          ]
+        },
+        {
+          "name": "colour",
+          "type": "string",
+          "max": 40
+        },
+        {
+          "name": "price",
+          "type": "decimal",
+          "required": true,
+          "min": "0.00"
+        },
+        {
+          "name": "stock",
+          "type": "int",
+          "min": 0
+        }
+      ],
+      "samples": [
+        {
+          "styleCode": "KRT-101-M-BLU",
+          "name": "Cotton kurta (sample)",
+          "sizeLabel": "M",
+          "colour": "Blue",
+          "price": 24.0,
+          "stock": 12
+        },
+        {
+          "styleCode": "KRT-101-L-BLU",
+          "name": "Cotton kurta (sample)",
+          "sizeLabel": "L",
+          "colour": "Blue",
+          "price": 24.0,
+          "stock": 8
+        },
+        {
+          "styleCode": "SHL-220-M-RED",
+          "name": "Printed shawl (sample)",
+          "sizeLabel": "M",
+          "colour": "Red",
+          "price": 18.5,
+          "stock": 5
+        }
+      ]
+    },
+    {
+      "name": "GarmentExchange",
+      "label": "Exchanges",
+      "path": "exchanges",
+      "fields": [
+        {
+          "name": "receiptNumber",
+          "type": "string",
+          "required": true,
+          "max": 30
+        },
+        {
+          "name": "styleCode",
+          "type": "string",
+          "required": true,
+          "max": 30
+        },
+        {
+          "name": "reason",
+          "type": "enum",
+          "required": true,
+          "values": [
+            "SIZE",
+            "COLOUR",
+            "FAULT",
+            "OTHER"
+          ]
+        },
+        {
+          "name": "exchangedOn",
+          "type": "date",
+          "required": true
+        },
+        {
+          "name": "refundGiven",
+          "type": "bool"
+        },
+        {
+          "name": "notes",
+          "type": "text"
+        }
+      ],
+      "samples": [
+        {
+          "receiptNumber": "R-000123",
+          "styleCode": "KRT-101-M-BLU",
+          "reason": "SIZE",
+          "exchangedOn": "2026-10-20",
+          "refundGiven": false,
+          "notes": "Swapped for size L (sample)"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "entity": "com.masmatix.suite.generated.travel.TravelBooking",
+  "note": "Invented sample data for demos. Not real people or businesses.",
+  "rows": [
+    {
+      "reference": "TA-2026-014",
+      "travellerName": "Sample Traveller One",
+      "tripType": "UMRAH",
+      "travelOn": "2026-12-05",
+      "passportReceived": true,
+      "visaStatus": "SUBMITTED",
+      "amount": 1450.0,
+      "paid": 500.0
+    },
+    {
+      "reference": "TA-2026-015",
+      "travellerName": "Sample Traveller Two",
+      "tripType": "FLIGHT",
+      "travelOn": "2026-11-20",
+      "passportReceived": false,
+      "visaStatus": "NOT_STARTED",
+      "amount": 620.0,
+      "paid": 620.0
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "entity": "com.masmatix.suite.generated.library.Book",
+  "note": "Invented sample data for demos. Not real people or businesses.",
+  "rows": [
+    {
+      "accessionNumber": "ACC-0001",
+      "title": "Sample Book of Algebra",
+      "author": "Sample Author",
+      "copies": 3
+    },
+    {
+      "accessionNumber": "ACC-0002",
+      "title": "Sample Reader for Year 7",
+      "author": "Sample Author",
+      "copies": 5
+    }
+  ]
+}

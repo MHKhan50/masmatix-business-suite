@@ -1,0 +1,106 @@
+{
+  "system": "microfinance",
+  "title": "Micro-finance",
+  "entities": [
+    {
+      "name": "Loan",
+      "label": "Loans",
+      "path": "loans",
+      "fields": [
+        {
+          "name": "loanNumber",
+          "type": "string",
+          "required": true,
+          "unique": true,
+          "max": 20
+        },
+        {
+          "name": "borrowerName",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "principal",
+          "type": "decimal",
+          "required": true,
+          "min": "0.00"
+        },
+        {
+          "name": "monthlyInstalment",
+          "type": "decimal",
+          "required": true,
+          "min": "0.00"
+        },
+        {
+          "name": "months",
+          "type": "int",
+          "required": true,
+          "min": 1,
+          "max": 60
+        },
+        {
+          "name": "startsOn",
+          "type": "date",
+          "required": true
+        },
+        {
+          "name": "status",
+          "type": "enum",
+          "values": [
+            "ACTIVE",
+            "CLOSED",
+            "DEFAULTED"
+          ]
+        }
+      ],
+      "samples": [
+        {
+          "loanNumber": "LN-0007",
+          "borrowerName": "Sample Borrower One",
+          "principal": 1200.0,
+          "monthlyInstalment": 100.0,
+          "months": 12,
+          "startsOn": "2026-06-01",
+          "status": "ACTIVE"
+        }
+      ]
+    },
+    {
+      "name": "LoanRepayment",
+      "label": "Repayments",
+      "path": "repayments",
+      "fields": [
+        {
+          "name": "loanNumber",
+          "type": "string",
+          "required": true,
+          "max": 20
+        },
+        {
+          "name": "paidOn",
+          "type": "date",
+          "required": true
+        },
+        {
+          "name": "amount",
+          "type": "decimal",
+          "required": true,
+          "min": "0.00"
+        },
+        {
+          "name": "penalty",
+          "type": "decimal",
+          "min": "0.00"
+        }
+      ],
+      "samples": [
+        {
+          "loanNumber": "LN-0007",
+          "paidOn": "2026-10-04",
+          "amount": 100.0,
+          "penalty": 0.0
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "system": "lawfirm",
+  "title": "Law firm case diary",
+  "entities": [
+    {
+      "name": "LegalCase",
+      "label": "Cases",
+      "path": "cases",
+      "fields": [
+        {
+          "name": "caseNumber",
+          "type": "string",
+          "required": true,
+          "unique": true,
+          "max": 40
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "court",
+          "type": "string"
+        },
+        {
+          "name": "clientName",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "status",
+          "type": "enum",
+          "values": [
+            "OPEN",
+            "ADJOURNED",
+            "DECIDED",
+            "CLOSED"
+          ]
+        }
+      ],
+      "samples": [
+        {
+          "caseNumber": "SAMPLE-CIV-2026-01",
+          "title": "Sample v Sample (invented)",
+          "court": "Sample Civil Court",
+          "clientName": "Sample Client One",
+          "status": "OPEN"
+        }
+      ]
+    },
+    {
+      "name": "Hearing",
+      "label": "Hearings",
+      "path": "hearings",
+      "fields": [
+        {
+          "name": "caseNumber",
+          "type": "string",
+          "required": true,
+          "max": 40
+        },
+        {
+          "name": "hearingOn",
+          "type": "date",
+          "required": true
+        },
+        {
+          "name": "purpose",
+          "type": "string"
+        },
+        {
+          "name": "outcome",
+          "type": "text"
+        }
+      ],
+      "samples": [
+        {
+          "caseNumber": "SAMPLE-CIV-2026-01",
+          "hearingOn": "2026-11-05",
+          "purpose": "Evidence (sample)",
+          "outcome": ""
+        }
+      ]
+    }
+  ]
+}

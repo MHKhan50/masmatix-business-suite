@@ -1,0 +1,13 @@
+{
+  "entity": "com.masmatix.suite.generated.bakery.ProductionBatch",
+  "note": "Invented sample data for demos. Not real people or businesses.",
+  "rows": [
+    {
+      "batchCode": "B-20261024-01",
+      "itemName": "White loaf (sample)",
+      "quantity": 40,
+      "bakedOn": "2026-10-24",
+      "expiresOn": "2026-10-27"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "entity": "com.masmatix.suite.generated.weighbridge.WeighSlip",
+  "note": "Invented sample data for demos. Not real people or businesses.",
+  "rows": [
+    {
+      "slipNumber": "WB-010245",
+      "vehicleNumber": "SAMPLE-123",
+      "material": "WHEAT",
+      "supplierName": "Sample Grain Supplier",
+      "grossKg": 24850,
+      "tareKg": 9120,
+      "weighedOn": "2026-10-23"
+    }
+  ]
+}

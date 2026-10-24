@@ -4,7 +4,7 @@ Small-business systems (shop till, bookings, clinic, gym, hotel and more) built 
 
 This repository rebuilds, from scratch, the kinds of systems our team has delivered for shops and service businesses. It contains no client code and no client data: every name, product and barcode in the sample data is invented and marked "(sample)".
 
-**Status:** the shared base and five systems are in place: **Shop POS**, **Salon and spa booking**, **Clinic prescriptions**, **Gym membership** and **Hotel booking**. More systems are added as spec files (see [Roadmap](#roadmap)).
+**Status:** 20 systems on one shared base. Five have hand-written features on top: **Shop POS**, **Salon and spa booking**, **Clinic prescriptions**, **Gym membership** and **Hotel booking**. The other 15 are built entirely by the generator from spec files: they have records, forms, validation, CSV export and an audit trail, but not yet their special features (see [Spec-only systems](#spec-only-systems)).
 
 | Till screen | Printed receipt (PDF) |
 |---|---|
@@ -95,9 +95,9 @@ Try a sample barcode on the till: `2000000000084`. On the gym desk, try member c
 
 | Where | What is tested | Command |
 |---|---|---|
-| `backend/src/test` | POS: money rounding, login, barcode lookup, sale totals, stock, receipt, role rules, generated CRUD and CSV, audit. Salon: overlap, back-to-back, opening hours, free slots, cancel. Clinic: allergy block and override, prescriber role, print. Gym: expiry day, early and late renewal, month ends, frozen and unknown codes. Hotel: double booking, same-day turnover, capacity, check-in and check-out order, invoice | `cd backend && mvn test` |
+| `backend/src/test` | Every seeded entity of all 20 systems: list and CSV export. POS: money rounding, login, barcode lookup, sale totals, stock, receipt, role rules, generated CRUD and CSV, audit. Salon: overlap, back-to-back, opening hours, free slots, cancel. Clinic: allergy block and override, prescriber role, print. Gym: expiry day, early and late renewal, month ends, frozen and unknown codes. Hotel: double booking, same-day turnover, capacity, check-in and check-out order, invoice | `cd backend && mvn test` |
 | `frontend/src/lib/*.test.ts` | cart totals, stay nights and totals, and renewal dates match the backend numbers | `cd frontend && npm test` |
-| `tools/generator/test_generate.py` | generated code shape; bad specs rejected | `python3 -m unittest discover -s tools/generator` |
+| `tools/generator/test_generate.py` | generated code shape; bad specs, duplicate entity names and SQL reserved field names rejected; every spec in `specs/` builds | `python3 -m unittest discover -s tools/generator` |
 
 The Docker build runs the backend and frontend tests, so `docker compose up --build` fails if a test fails.
 
@@ -127,6 +127,28 @@ python3 tools/generator/generate.py --check  # fails if generated files are out 
 
 Each entity gets a table, validation, REST endpoints under `/api/<system>/<path>`, OpenAPI docs, CSV export, audit entries and a screen in the web app. Hand-written features (like the till) sit beside the generated code.
 
+## Spec-only systems
+
+These systems come only from a file in `specs/` (two or so entities each, with invented sample rows). They show how fast a new system starts on the shared base. The features in the last column are **not built yet**; today they are plain records that staff fill in.
+
+| System | Spec | Records | Not built yet |
+|---|---|---|---|
+| Garment shop | `garment.json` | garments (style, size, colour, stock), exchanges | till for garments, SMS alerts |
+| Mobile IMEI tracker | `imei.json` | handsets by IMEI, warranty claims | IMEI check digit, warranty end alerts |
+| Bakery | `bakery.json` | items with shelf life, production batches | expiry alerts, till |
+| Diagnostic lab | `lab.json` | test list, lab orders and results | analyser interface, printed reports |
+| Coaching centre | `coaching.json` | batches with monthly fee, students | fee receipts, overdue list |
+| Library | `library.json` | books, loans | automatic fine calculation |
+| Tailoring | `tailoring.json` | customer measurements, orders with trial date and advance | balance due, order slips |
+| Travel agency | `travel.json` | bookings with passport and visa status | document checklist, reminders |
+| Wholesale distribution | `wholesale.json` | delivery routes, advance orders | loading lists per route |
+| Mill weighbridge | `weighbridge.json` | weigh slips (gross and tare kg) | weighbridge hardware link, net weight and slip print |
+| Construction materials | `construction.json` | material receipts, labour days | cost dashboard |
+| Housing society | `housing.json` | plots, instalments | transfers, overdue list |
+| Payroll and attendance | `payroll.json` | employees, attendance with late minutes and fines | biometric reader link, fine and overtime rules |
+| Micro-finance | `microfinance.json` | loans, repayments | schedule and penalty calculation |
+| Law firm case diary | `lawfirm.json` | cases, hearings | hearing calendar, document store |
+
 ## Roadmap
 
 Systems with hand-written features on top of the generated base:
@@ -136,8 +158,8 @@ Systems with hand-written features on top of the generated base:
 - [x] Clinic prescription writer: allergy warning, printable prescription
 - [x] Gym membership and fees: entry blocked after expiry, fee receipts
 - [x] Hotel booking and check-in: availability, no double booking, invoices
-
-The remaining systems listed on [masmatixinnovations.co.uk](https://masmatixinnovations.co.uk/#systems) will be added as spec files.
+- [x] The other 15 systems from [masmatixinnovations.co.uk](https://masmatixinnovations.co.uk/#systems) as spec files
+- [ ] Their special features (last column above), added one system at a time
 
 ## Limitations
 
@@ -146,6 +168,7 @@ The remaining systems listed on [masmatixinnovations.co.uk](https://masmatixinno
 - The clinic module is sample software, not a medical device. The allergy check is a plain text match against the patient's recorded allergies; it does not replace a drug database or clinical judgement, and printed prescriptions say they are not valid for dispensing.
 - Salon opening hours (09:00 to 18:00) and the hotel's 30-night limit are constants in code, not settings yet.
 - Receipts are plain sales receipts. They are not certified for any tax authority's e-invoicing scheme.
+- Spec-only systems do not link records to each other yet (for example a loan repayment stores the loan number as text, not a foreign key), and they do no calculations such as fines, net weight or balances.
 - The demo users share one password from `.env`. Change it, and the JWT secret, before any real use.
 
 ## Licence

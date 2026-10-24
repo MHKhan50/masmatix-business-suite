@@ -49,10 +49,6 @@ class GeneratorTest(unittest.TestCase):
                     generate.build(Path(d))
 
 
-if __name__ == "__main__":
-    unittest.main()
-
-
 class UniqueFieldTest(unittest.TestCase):
 
     def test_unique_string_gets_unique_column(self) -> None:
@@ -71,3 +67,41 @@ class UniqueFieldTest(unittest.TestCase):
             write_spec(Path(d), spec)
             with self.assertRaises(generate.SpecError):
                 generate.build(Path(d))
+
+
+class ClashTest(unittest.TestCase):
+
+    def test_same_entity_name_in_two_specs_is_rejected(self) -> None:
+        other = json.loads(json.dumps(GOOD))
+        other["system"] = "other"
+        with tempfile.TemporaryDirectory() as d:
+            write_spec(Path(d), GOOD)
+            (Path(d) / "t.json").write_text(json.dumps(other), encoding="utf-8")
+            with self.assertRaises(generate.SpecError):
+                generate.build(Path(d), Path(d) / "none")
+
+    def test_name_of_hand_written_entity_is_rejected(self) -> None:
+        with tempfile.TemporaryDirectory() as d:
+            write_spec(Path(d), GOOD)
+            java = Path(d) / "java"
+            java.mkdir()
+            (java / "Room.java").write_text("@Entity\npublic class Room {}\n", encoding="utf-8")
+            with self.assertRaises(generate.SpecError):
+                generate.build(Path(d), java)
+
+    def test_sql_reserved_field_name_is_rejected(self) -> None:
+        spec = json.loads(json.dumps(GOOD))
+        spec["entities"][0]["fields"].append({"name": "order", "type": "int"})
+        with tempfile.TemporaryDirectory() as d:
+            write_spec(Path(d), spec)
+            with self.assertRaises(generate.SpecError):
+                generate.build(Path(d), Path(d) / "none")
+
+    def test_every_spec_in_the_repo_builds(self) -> None:
+        files = generate.build(generate.SPECS)
+        systems = json.loads(files[generate.FRONT_OUT])
+        self.assertEqual(len(systems), len(list(generate.SPECS.glob("*.json"))))
+
+
+if __name__ == "__main__":
+    unittest.main()

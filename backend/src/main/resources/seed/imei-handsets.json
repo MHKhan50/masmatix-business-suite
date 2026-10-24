@@ -1,0 +1,22 @@
+{
+  "entity": "com.masmatix.suite.generated.imei.Handset",
+  "note": "Invented sample data for demos. Not real people or businesses.",
+  "rows": [
+    {
+      "imei": "000000000000017",
+      "brand": "SampleBrand",
+      "model": "S1 128 GB (sample)",
+      "soldOn": "2026-08-02",
+      "warrantyMonths": 12,
+      "customerPhone": "07000 000301"
+    },
+    {
+      "imei": "000000000000025",
+      "brand": "SampleBrand",
+      "model": "S2 256 GB (sample)",
+      "soldOn": "2026-09-15",
+      "warrantyMonths": 12,
+      "customerPhone": "07000 000302"
+    }
+  ]
+}

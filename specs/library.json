@@ -1,0 +1,95 @@
+{
+  "system": "library",
+  "title": "Library",
+  "entities": [
+    {
+      "name": "Book",
+      "label": "Books",
+      "path": "books",
+      "fields": [
+        {
+          "name": "accessionNumber",
+          "type": "string",
+          "required": true,
+          "unique": true,
+          "max": 20
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "author",
+          "type": "string"
+        },
+        {
+          "name": "copies",
+          "type": "int",
+          "min": 0,
+          "max": 500
+        }
+      ],
+      "samples": [
+        {
+          "accessionNumber": "ACC-0001",
+          "title": "Sample Book of Algebra",
+          "author": "Sample Author",
+          "copies": 3
+        },
+        {
+          "accessionNumber": "ACC-0002",
+          "title": "Sample Reader for Year 7",
+          "author": "Sample Author",
+          "copies": 5
+        }
+      ]
+    },
+    {
+      "name": "BookLoan",
+      "label": "Loans",
+      "path": "loans",
+      "fields": [
+        {
+          "name": "accessionNumber",
+          "type": "string",
+          "required": true,
+          "max": 20
+        },
+        {
+          "name": "borrower",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "issuedOn",
+          "type": "date",
+          "required": true
+        },
+        {
+          "name": "dueOn",
+          "type": "date",
+          "required": true
+        },
+        {
+          "name": "returnedOn",
+          "type": "date"
+        },
+        {
+          "name": "fine",
+          "type": "decimal",
+          "min": "0.00"
+        }
+      ],
+      "samples": [
+        {
+          "accessionNumber": "ACC-0001",
+          "borrower": "Sample Student One",
+          "issuedOn": "2026-10-10",
+          "dueOn": "2026-10-24",
+          "fine": 0.0
+        }
+      ]
+    }
+  ]
+}

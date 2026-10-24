@@ -1,0 +1,17 @@
+{
+  "entity": "com.masmatix.suite.generated.housing.PlotInstalment",
+  "note": "Invented sample data for demos. Not real people or businesses.",
+  "rows": [
+    {
+      "plotNumber": "A-101",
+      "dueOn": "2026-10-01",
+      "amount": 250.0,
+      "paidOn": "2026-10-03"
+    },
+    {
+      "plotNumber": "A-101",
+      "dueOn": "2026-11-01",
+      "amount": 250.0
+    }
+  ]
+}

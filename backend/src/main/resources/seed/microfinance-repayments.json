@@ -1,0 +1,12 @@
+{
+  "entity": "com.masmatix.suite.generated.microfinance.LoanRepayment",
+  "note": "Invented sample data for demos. Not real people or businesses.",
+  "rows": [
+    {
+      "loanNumber": "LN-0007",
+      "paidOn": "2026-10-04",
+      "amount": 100.0,
+      "penalty": 0.0
+    }
+  ]
+}

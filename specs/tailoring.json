@@ -1,0 +1,116 @@
+{
+  "system": "tailoring",
+  "title": "Tailoring",
+  "entities": [
+    {
+      "name": "TailoringCustomer",
+      "label": "Customers",
+      "path": "customers",
+      "fields": [
+        {
+          "name": "fullName",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "phone",
+          "type": "phone"
+        },
+        {
+          "name": "chestCm",
+          "type": "decimal",
+          "min": "0.00"
+        },
+        {
+          "name": "waistCm",
+          "type": "decimal",
+          "min": "0.00"
+        },
+        {
+          "name": "lengthCm",
+          "type": "decimal",
+          "min": "0.00"
+        },
+        {
+          "name": "notes",
+          "type": "text"
+        }
+      ],
+      "samples": [
+        {
+          "fullName": "Sample Customer One",
+          "phone": "07000 000501",
+          "chestCm": 102.0,
+          "waistCm": 88.0,
+          "lengthCm": 104.0,
+          "notes": "Prefers loose fit (sample)"
+        }
+      ]
+    },
+    {
+      "name": "TailoringOrder",
+      "label": "Orders",
+      "path": "orders",
+      "fields": [
+        {
+          "name": "orderNumber",
+          "type": "string",
+          "required": true,
+          "unique": true,
+          "max": 30
+        },
+        {
+          "name": "customerName",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "garment",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "trialOn",
+          "type": "date"
+        },
+        {
+          "name": "deliveryOn",
+          "type": "date"
+        },
+        {
+          "name": "price",
+          "type": "decimal",
+          "min": "0.00"
+        },
+        {
+          "name": "advancePaid",
+          "type": "decimal",
+          "min": "0.00"
+        },
+        {
+          "name": "status",
+          "type": "enum",
+          "values": [
+            "CUTTING",
+            "STITCHING",
+            "TRIAL",
+            "READY",
+            "DELIVERED"
+          ]
+        }
+      ],
+      "samples": [
+        {
+          "orderNumber": "TL-0091",
+          "customerName": "Sample Customer One",
+          "garment": "Shalwar kameez (sample)",
+          "trialOn": "2026-10-28",
+          "deliveryOn": "2026-11-02",
+          "price": 45.0,
+          "advancePaid": 20.0,
+          "status": "STITCHING"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "system": "imei",
+  "title": "Mobile IMEI tracker",
+  "entities": [
+    {
+      "name": "Handset",
+      "label": "Handsets",
+      "path": "handsets",
+      "fields": [
+        {
+          "name": "imei",
+          "type": "string",
+          "required": true,
+          "unique": true,
+          "max": 15
+        },
+        {
+          "name": "brand",
+          "type": "string",
+          "required": true,
+          "max": 40
+        },
+        {
+          "name": "model",
+          "type": "string",
+          "required": true,
+          "max": 60
+        },
+        {
+          "name": "soldOn",
+          "type": "date"
+        },
+        {
+          "name": "warrantyMonths",
+          "type": "int",
+          "min": 0,
+          "max": 36
+        },
+        {
+          "name": "customerPhone",
+          "type": "phone"
+        }
+      ],
+      "samples": [
+        {
+          "imei": "000000000000017",
+          "brand": "SampleBrand",
+          "model": "S1 128 GB (sample)",
+          "soldOn": "2026-08-02",
+          "warrantyMonths": 12,
+          "customerPhone": "07000 000301"
+        },
+        {
+          "imei": "000000000000025",
+          "brand": "SampleBrand",
+          "model": "S2 256 GB (sample)",
+          "soldOn": "2026-09-15",
+          "warrantyMonths": 12,
+          "customerPhone": "07000 000302"
+        }
+      ]
+    },
+    {
+      "name": "WarrantyClaim",
+      "label": "Warranty claims",
+      "path": "claims",
+      "fields": [
+        {
+          "name": "imei",
+          "type": "string",
+          "required": true,
+          "max": 15
+        },
+        {
+          "name": "fault",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "receivedOn",
+          "type": "date",
+          "required": true
+        },
+        {
+          "name": "status",
+          "type": "enum",
+          "values": [
+            "RECEIVED",
+            "SENT_TO_SERVICE",
+            "REPAIRED",
+            "RETURNED",
+            "REJECTED"
+          ]
+        }
+      ],
+      "samples": [
+        {
+          "imei": "000000000000017",
+          "fault": "Charging port loose (sample)",
+          "receivedOn": "2026-10-18",
+          "status": "SENT_TO_SERVICE"
+        }
+      ]
+    }
+  ]
+}

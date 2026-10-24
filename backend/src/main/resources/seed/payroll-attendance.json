@@ -1,0 +1,13 @@
+{
+  "entity": "com.masmatix.suite.generated.payroll.AttendanceEntry",
+  "note": "Invented sample data for demos. Not real people or businesses.",
+  "rows": [
+    {
+      "employeeCode": "EMP-001",
+      "workDate": "2026-10-23",
+      "minutesLate": 12,
+      "overtimeMinutes": 0,
+      "fineAmount": 2.0
+    }
+  ]
+}

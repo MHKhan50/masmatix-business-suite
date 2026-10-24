@@ -1,0 +1,14 @@
+{
+  "entity": "com.masmatix.suite.generated.wholesale.AdvanceOrder",
+  "note": "Invented sample data for demos. Not real people or businesses.",
+  "rows": [
+    {
+      "orderNumber": "AO-7781",
+      "shopName": "Sample General Store",
+      "routeName": "North market route (sample)",
+      "deliveryOn": "2026-10-26",
+      "amount": 312.5,
+      "status": "BOOKED"
+    }
+  ]
+}

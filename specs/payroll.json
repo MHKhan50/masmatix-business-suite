@@ -1,0 +1,91 @@
+{
+  "system": "payroll",
+  "title": "Payroll and attendance",
+  "entities": [
+    {
+      "name": "Employee",
+      "label": "Employees",
+      "path": "employees",
+      "fields": [
+        {
+          "name": "employeeCode",
+          "type": "string",
+          "required": true,
+          "unique": true,
+          "max": 20
+        },
+        {
+          "name": "fullName",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "monthlySalary",
+          "type": "decimal",
+          "min": "0.00"
+        },
+        {
+          "name": "shiftStart",
+          "type": "string",
+          "max": 5
+        }
+      ],
+      "samples": [
+        {
+          "employeeCode": "EMP-001",
+          "fullName": "Sample Employee One",
+          "monthlySalary": 1800.0,
+          "shiftStart": "09:00"
+        },
+        {
+          "employeeCode": "EMP-002",
+          "fullName": "Sample Employee Two",
+          "monthlySalary": 1650.0,
+          "shiftStart": "08:30"
+        }
+      ]
+    },
+    {
+      "name": "AttendanceEntry",
+      "label": "Attendance",
+      "path": "attendance",
+      "fields": [
+        {
+          "name": "employeeCode",
+          "type": "string",
+          "required": true,
+          "max": 20
+        },
+        {
+          "name": "workDate",
+          "type": "date",
+          "required": true
+        },
+        {
+          "name": "minutesLate",
+          "type": "int",
+          "min": 0
+        },
+        {
+          "name": "overtimeMinutes",
+          "type": "int",
+          "min": 0
+        },
+        {
+          "name": "fineAmount",
+          "type": "decimal",
+          "min": "0.00"
+        }
+      ],
+      "samples": [
+        {
+          "employeeCode": "EMP-001",
+          "workDate": "2026-10-23",
+          "minutesLate": 12,
+          "overtimeMinutes": 0,
+          "fineAmount": 2.0
+        }
+      ]
+    }
+  ]
+}

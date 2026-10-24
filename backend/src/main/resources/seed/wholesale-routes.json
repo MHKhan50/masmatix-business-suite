@@ -1,0 +1,18 @@
+{
+  "entity": "com.masmatix.suite.generated.wholesale.DeliveryRoute",
+  "note": "Invented sample data for demos. Not real people or businesses.",
+  "rows": [
+    {
+      "name": "North market route (sample)",
+      "rider": "Sample Rider One",
+      "routeDay": "MON",
+      "shops": 18
+    },
+    {
+      "name": "Canal road route (sample)",
+      "rider": "Sample Rider Two",
+      "routeDay": "THU",
+      "shops": 12
+    }
+  ]
+}
