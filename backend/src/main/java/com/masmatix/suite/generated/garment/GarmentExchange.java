@@ -21,6 +21,10 @@ public class GarmentExchange extends BaseEntity {
     @Column(length = 30, nullable = false)
     private String styleCode;
 
+    @Size(max = 30)
+    @Column(length = 30)
+    private String newStyleCode;
+
     @NotBlank
     @Size(max = 40)
     @Pattern(regexp = "^(SIZE|COLOUR|FAULT|OTHER)?$", message = "must be one of SIZE, COLOUR, FAULT, OTHER")
@@ -29,6 +33,9 @@ public class GarmentExchange extends BaseEntity {
 
     @NotNull
     private LocalDate exchangedOn;
+
+    @Column(precision = 12, scale = 2)
+    private BigDecimal priceDifference;
 
     private Boolean refundGiven;
 
@@ -40,10 +47,14 @@ public class GarmentExchange extends BaseEntity {
     public void setReceiptNumber(String v) { this.receiptNumber = v; }
     public String getStyleCode() { return styleCode; }
     public void setStyleCode(String v) { this.styleCode = v; }
+    public String getNewStyleCode() { return newStyleCode; }
+    public void setNewStyleCode(String v) { this.newStyleCode = v; }
     public String getReason() { return reason; }
     public void setReason(String v) { this.reason = v; }
     public LocalDate getExchangedOn() { return exchangedOn; }
     public void setExchangedOn(LocalDate v) { this.exchangedOn = v; }
+    public BigDecimal getPriceDifference() { return priceDifference; }
+    public void setPriceDifference(BigDecimal v) { this.priceDifference = v; }
     public Boolean getRefundGiven() { return refundGiven; }
     public void setRefundGiven(Boolean v) { this.refundGiven = v; }
     public String getNotes() { return notes; }

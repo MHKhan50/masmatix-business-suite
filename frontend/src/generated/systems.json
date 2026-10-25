@@ -61,7 +61,7 @@
             "name": "quantity",
             "type": "int",
             "required": true,
-            "min": 1
+            "min": 0
           },
           {
             "name": "bakedOn",
@@ -359,6 +359,11 @@
             "max": 30
           },
           {
+            "name": "newStyleCode",
+            "type": "string",
+            "max": 30
+          },
+          {
             "name": "reason",
             "type": "enum",
             "required": true,
@@ -373,6 +378,10 @@
             "name": "exchangedOn",
             "type": "date",
             "required": true
+          },
+          {
+            "name": "priceDifference",
+            "type": "decimal"
           },
           {
             "name": "refundGiven",
@@ -547,47 +556,6 @@
     "system": "imei",
     "title": "Mobile IMEI tracker",
     "entities": [
-      {
-        "name": "Handset",
-        "label": "Handsets",
-        "path": "handsets",
-        "api": "/api/imei/handsets",
-        "fields": [
-          {
-            "name": "imei",
-            "type": "string",
-            "required": true,
-            "unique": true,
-            "max": 15
-          },
-          {
-            "name": "brand",
-            "type": "string",
-            "required": true,
-            "max": 40
-          },
-          {
-            "name": "model",
-            "type": "string",
-            "required": true,
-            "max": 60
-          },
-          {
-            "name": "soldOn",
-            "type": "date"
-          },
-          {
-            "name": "warrantyMonths",
-            "type": "int",
-            "min": 0,
-            "max": 36
-          },
-          {
-            "name": "customerPhone",
-            "type": "phone"
-          }
-        ]
-      },
       {
         "name": "WarrantyClaim",
         "label": "Warranty claims",

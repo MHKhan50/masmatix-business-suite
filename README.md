@@ -4,7 +4,7 @@ Small-business systems (shop till, bookings, clinic, gym, hotel and more) built 
 
 This repository rebuilds, from scratch, the kinds of systems our team has delivered for shops and service businesses. It contains no client code and no client data: every name, product and barcode in the sample data is invented and marked "(sample)".
 
-**Status:** 20 systems on one shared base. Five have hand-written features on top: **Shop POS**, **Salon and spa booking**, **Clinic prescriptions**, **Gym membership** and **Hotel booking**. The other 15 are built entirely by the generator from spec files: they have records, forms, validation, CSV export and an audit trail, but not yet their special features (see [Spec-only systems](#spec-only-systems)).
+**Status:** 20 systems on one shared base. Eight have hand-written features on top: **Shop POS**, **Salon and spa booking**, **Clinic prescriptions**, **Gym membership**, **Hotel booking**, **Garment shop**, **Mobile IMEI tracker** and **Bakery**. The other 12 are built entirely by the generator from spec files: they have records, forms, validation, CSV export and an audit trail, but not yet their special features (see [Spec-only systems](#spec-only-systems)).
 
 | Till screen | Printed receipt (PDF) |
 |---|---|
@@ -17,7 +17,7 @@ This repository rebuilds, from scratch, the kinds of systems our team has delive
 | Part | Tech | What it does |
 |---|---|---|
 | `backend/` | Java 21, Spring Boot 3, Spring Security (JWT), JPA, PostgreSQL | REST API, roles, audit log, PDF receipts, CSV export |
-| `frontend/` | React 18, TypeScript, Vite | Till, salon diary, prescription writer, gym desk, hotel desk, record screens |
+| `frontend/` | React 18, TypeScript, Vite | Till, salon diary, prescription writer, gym desk, hotel desk, garment till, IMEI desk, bakery counter, record screens |
 | `tools/generator/` | Python 3.9+ (standard library only) | Builds entity, repository, REST controller and screen definition from a JSON spec |
 | `specs/` | JSON | One spec file per system |
 | `docker-compose.yml` | Docker | Database, API and web app with one command |
@@ -74,6 +74,28 @@ This repository rebuilds, from scratch, the kinds of systems our team has delive
 - Front desk lists today's arrivals and guests in house. Check-in only from the arrival date; check-out only after check-in; only reservations can be cancelled (managers).
 - A4 invoice PDF per booking. Rooms come from `specs/hotel.json`.
 
+### Garment shop
+
+- Till by style code (one code per style, size and colour, e.g. `KRT-101-M-BLU`), scanned or typed. Stock is locked per row during the sale.
+- Cash or card, change due, and an 80 mm PDF receipt with a receipt number. Prices include VAT, as on UK clothing tags.
+- Exchanges from the receipt within 30 days: the returned item must be on that receipt and not already exchanged. The screen and the API show the price difference (customer pays more, refund, or even swap).
+- A returned item goes back on the shelf, except when the reason is `FAULT`. Every exchange is recorded with the old and new style codes and the difference.
+- Low-stock list (3 or fewer).
+
+### Mobile IMEI tracker
+
+- IMEI check digit (Luhn): a handset with a mistyped IMEI cannot be saved, and the desk screen says so while typing. Swapping two neighbouring digits is caught.
+- Warranty status by IMEI: cover runs to the day before the same date N months after sale (12 months from 2 Aug 2026 ends on 1 Aug 2027).
+- A warranty claim opens only for a handset this shop sold, inside its cover, with no other claim still open for it.
+- List of handsets whose cover ends in the next 30 days, with the customer's phone, for reminder calls.
+
+### Bakery
+
+- New batch: the sell-by date is set from the item's shelf life (baked on 24 Oct with 3 days: sell up to and including 27 Oct), with a batch code per day.
+- Counter sale takes stock from the batch that expires first and never sells an expired batch. If fresh stock is short, nothing is sold.
+- Expiry alerts: batches with stock that are expired, on their last day or ending tomorrow.
+- Managers write off what is left of a batch; the quantity and the user go to the audit log.
+
 ## Run it
 
 Needs [Docker Desktop](https://www.docker.com/products/docker-desktop/).
@@ -89,14 +111,14 @@ docker compose up --build
 
 The first build downloads Maven and npm packages and runs all tests inside the build, so it takes a few minutes.
 
-Try a sample barcode on the till: `2000000000084`. On the gym desk, try member codes `GYM-0001` (active), `GYM-0002` (expired) and `GYM-0003` (frozen). Sample barcodes use the 200 to 299 in-store prefix range, so they do not belong to any real product.
+Try a sample barcode on the till: `2000000000084`. On the gym desk, try member codes `GYM-0001` (active), `GYM-0002` (expired) and `GYM-0003` (frozen). On the IMEI desk, try `000000000000018` (in warranty), `000000000000034` (cover ended) and `000000000000019` (wrong check digit). Sample IMEIs use the `00` prefix, so they do not belong to any real phone. Sample barcodes use the 200 to 299 in-store prefix range, so they do not belong to any real product.
 
 ## Tests
 
 | Where | What is tested | Command |
 |---|---|---|
-| `backend/src/test` | Every seeded entity of all 20 systems: list and CSV export. POS: money rounding, login, barcode lookup, sale totals, stock, receipt, role rules, generated CRUD and CSV, audit. Salon: overlap, back-to-back, opening hours, free slots, cancel. Clinic: allergy block and override, prescriber role, print. Gym: expiry day, early and late renewal, month ends, frozen and unknown codes. Hotel: double booking, same-day turnover, capacity, check-in and check-out order, invoice | `cd backend && mvn test` |
-| `frontend/src/lib/*.test.ts` | cart totals, stay nights and totals, and renewal dates match the backend numbers | `cd frontend && npm test` |
+| `backend/src/test` | Every seeded entity of all 20 systems: list and CSV export. POS: money rounding, login, barcode lookup, sale totals, stock, receipt, role rules, generated CRUD and CSV, audit. Salon: overlap, back-to-back, opening hours, free slots, cancel. Clinic: allergy block and override, prescriber role, print. Gym: expiry day, early and late renewal, month ends, frozen and unknown codes. Hotel: double booking, same-day turnover, capacity, check-in and check-out order, invoice. Garment: sale, stock, receipt, exchange once per item. IMEI: check digit, warranty, one open claim. Bakery: shelf life, oldest batch first, expired never sold, write-off role | `cd backend && mvn test` |
+| `frontend/src/lib/*.test.ts` | cart totals, stay nights and totals, renewal dates, IMEI check digit, warranty end, expiry status and exchange difference match the backend numbers | `cd frontend && npm test` |
 | `tools/generator/test_generate.py` | generated code shape; bad specs, duplicate entity names and SQL reserved field names rejected; every spec in `specs/` builds | `python3 -m unittest discover -s tools/generator` |
 
 The Docker build runs the backend and frontend tests, so `docker compose up --build` fails if a test fails.
@@ -133,9 +155,6 @@ These systems come only from a file in `specs/` (two or so entities each, with i
 
 | System | Spec | Records | Not built yet |
 |---|---|---|---|
-| Garment shop | `garment.json` | garments (style, size, colour, stock), exchanges | till for garments, SMS alerts |
-| Mobile IMEI tracker | `imei.json` | handsets by IMEI, warranty claims | IMEI check digit, warranty end alerts |
-| Bakery | `bakery.json` | items with shelf life, production batches | expiry alerts, till |
 | Diagnostic lab | `lab.json` | test list, lab orders and results | analyser interface, printed reports |
 | Coaching centre | `coaching.json` | batches with monthly fee, students | fee receipts, overdue list |
 | Library | `library.json` | books, loans | automatic fine calculation |

@@ -22,7 +22,7 @@ public class ProductionBatch extends BaseEntity {
     private String itemName;
 
     @NotNull
-    @Min(1)
+    @Min(0)
     private Integer quantity;
 
     @NotNull

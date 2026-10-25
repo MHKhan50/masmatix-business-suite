@@ -65,3 +65,19 @@ export const gymMemberEntity: EntityDef = {
     { name: "frozen", type: "bool" },
   ],
 };
+
+/** Hand-written IMEI handset module (check digit enforced by the API), shown with the same generic screen. */
+export const handsetEntity: EntityDef = {
+  name: "Handset",
+  label: "Handsets",
+  path: "handsets",
+  api: "/api/imei/handsets",
+  fields: [
+    { name: "imei", type: "string", required: true },
+    { name: "brand", type: "string", required: true },
+    { name: "model", type: "string", required: true },
+    { name: "soldOn", type: "date" },
+    { name: "warrantyMonths", type: "int", min: 0, max: 36 },
+    { name: "customerPhone", type: "phone" },
+  ],
+};

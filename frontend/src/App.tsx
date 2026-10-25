@@ -1,11 +1,14 @@
 import { useState, type FormEvent } from "react";
 import { BrowserRouter, NavLink, Navigate, Route, Routes } from "react-router-dom";
 import { api, loadSession, saveSession, type Session } from "./lib/api";
-import { generatedSystems, gymMemberEntity, productEntity } from "./lib/fields";
+import { generatedSystems, gymMemberEntity, handsetEntity, productEntity } from "./lib/fields";
 import Audit from "./pages/Audit";
+import BakeryCounter from "./pages/BakeryCounter";
 import CrudPage from "./pages/CrudPage";
+import GarmentTill from "./pages/GarmentTill";
 import GymDesk from "./pages/GymDesk";
 import HotelDesk from "./pages/HotelDesk";
+import ImeiDesk from "./pages/ImeiDesk";
 import Prescriptions from "./pages/Prescriptions";
 import Sales from "./pages/Sales";
 import SalonDiary from "./pages/SalonDiary";
@@ -18,6 +21,9 @@ const handWritten: Record<string, { path: string; label: string }[]> = {
   clinic: [{ path: "prescriptions", label: "Prescriptions" }],
   gym: [{ path: "desk", label: "Front desk" }, { path: "members", label: "Members" }],
   hotel: [{ path: "desk", label: "Front desk" }],
+  garment: [{ path: "till", label: "Till and exchanges" }],
+  imei: [{ path: "desk", label: "IMEI desk" }, { path: "handsets", label: "Handsets" }],
+  bakery: [{ path: "counter", label: "Counter and expiry" }],
 };
 const order = Object.keys(handWritten);
 const systems = [...generatedSystems].sort(
@@ -103,6 +109,10 @@ export default function App() {
             <Route path="/gym/desk" element={<GymDesk />} />
             <Route path="/gym/members" element={<CrudPage entity={gymMemberEntity} session={session} />} />
             <Route path="/hotel/desk" element={<HotelDesk session={session} />} />
+            <Route path="/garment/till" element={<GarmentTill />} />
+            <Route path="/imei/desk" element={<ImeiDesk />} />
+            <Route path="/imei/handsets" element={<CrudPage entity={handsetEntity} session={session} />} />
+            <Route path="/bakery/counter" element={<BakeryCounter session={session} />} />
             {generatedSystems.map((sys) =>
               sys.entities.map((e) => (
                 <Route key={e.api} path={`/${sys.system}/${e.path}`} element={<CrudPage entity={e} session={session} />} />

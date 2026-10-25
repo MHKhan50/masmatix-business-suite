@@ -1,22 +1,9 @@
 {
-  "entity": "com.masmatix.suite.generated.imei.Handset",
-  "note": "Invented sample data for demos. Not real people or businesses.",
+  "entity": "com.masmatix.suite.imei.Handset",
+  "note": "Invented sample data for demos. IMEIs use the 00 prefix with a valid check digit, so they do not belong to any real phone.",
   "rows": [
-    {
-      "imei": "000000000000017",
-      "brand": "SampleBrand",
-      "model": "S1 128 GB (sample)",
-      "soldOn": "2026-08-02",
-      "warrantyMonths": 12,
-      "customerPhone": "07000 000301"
-    },
-    {
-      "imei": "000000000000025",
-      "brand": "SampleBrand",
-      "model": "S2 256 GB (sample)",
-      "soldOn": "2026-09-15",
-      "warrantyMonths": 12,
-      "customerPhone": "07000 000302"
-    }
+    {"imei": "000000000000018", "brand": "SampleBrand", "model": "S1 128 GB (sample)", "soldOn": "2026-08-02", "warrantyMonths": 12, "customerPhone": "07000 000301"},
+    {"imei": "000000000000026", "brand": "SampleBrand", "model": "S2 256 GB (sample)", "soldOn": "2026-09-15", "warrantyMonths": 12, "customerPhone": "07000 000302"},
+    {"imei": "000000000000034", "brand": "SampleBrand", "model": "S0 64 GB (sample)", "soldOn": "2025-06-10", "warrantyMonths": 12, "customerPhone": "07000 000303"}
   ]
 }

@@ -8,7 +8,9 @@
       "reason": "SIZE",
       "exchangedOn": "2026-10-20",
       "refundGiven": false,
-      "notes": "Swapped for size L (sample)"
+      "notes": "Swapped for size L (sample)",
+      "newStyleCode": "KRT-101-L-BLU",
+      "priceDifference": 0.0
     }
   ]
 }
