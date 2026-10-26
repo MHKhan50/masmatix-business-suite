@@ -3,6 +3,18 @@ import { BrowserRouter, NavLink, Navigate, Route, Routes } from "react-router-do
 import { api, loadSession, saveSession, type Session } from "./lib/api";
 import { generatedSystems, gymMemberEntity, handsetEntity, productEntity } from "./lib/fields";
 import Audit from "./pages/Audit";
+import CoachingFees from "./pages/CoachingFees";
+import ConstructionCosts from "./pages/ConstructionCosts";
+import HousingDesk from "./pages/HousingDesk";
+import LabDesk from "./pages/LabDesk";
+import HearingCalendar from "./pages/HearingCalendar";
+import LibraryDesk from "./pages/LibraryDesk";
+import LoanDesk from "./pages/LoanDesk";
+import PayrollDesk from "./pages/PayrollDesk";
+import TailoringBoard from "./pages/TailoringBoard";
+import TravelDesk from "./pages/TravelDesk";
+import WeighbridgeDesk from "./pages/WeighbridgeDesk";
+import WholesaleLoading from "./pages/WholesaleLoading";
 import BakeryCounter from "./pages/BakeryCounter";
 import CrudPage from "./pages/CrudPage";
 import GarmentTill from "./pages/GarmentTill";
@@ -24,6 +36,18 @@ const handWritten: Record<string, { path: string; label: string }[]> = {
   garment: [{ path: "till", label: "Till and exchanges" }],
   imei: [{ path: "desk", label: "IMEI desk" }, { path: "handsets", label: "Handsets" }],
   bakery: [{ path: "counter", label: "Counter and expiry" }],
+  coaching: [{ path: "fees", label: "Fees and overdue" }],
+  construction: [{ path: "costs", label: "Site costs" }],
+  housing: [{ path: "desk", label: "Overdue and transfers" }],
+  lab: [{ path: "worklist", label: "Work list and reports" }],
+  lawfirm: [{ path: "calendar", label: "Hearing calendar" }],
+  library: [{ path: "desk", label: "Issue and return" }],
+  microfinance: [{ path: "desk", label: "Loan desk" }],
+  payroll: [{ path: "desk", label: "Attendance and pay" }],
+  tailoring: [{ path: "board", label: "Order board" }],
+  travel: [{ path: "desk", label: "Document checklist" }],
+  weighbridge: [{ path: "desk", label: "Weigh and slip" }],
+  wholesale: [{ path: "loading", label: "Loading list" }],
 };
 const order = Object.keys(handWritten);
 const systems = [...generatedSystems].sort(
@@ -113,6 +137,18 @@ export default function App() {
             <Route path="/imei/desk" element={<ImeiDesk />} />
             <Route path="/imei/handsets" element={<CrudPage entity={handsetEntity} session={session} />} />
             <Route path="/bakery/counter" element={<BakeryCounter session={session} />} />
+            <Route path="/coaching/fees" element={<CoachingFees />} />
+            <Route path="/construction/costs" element={<ConstructionCosts />} />
+            <Route path="/housing/desk" element={<HousingDesk session={session} />} />
+            <Route path="/lab/worklist" element={<LabDesk />} />
+            <Route path="/lawfirm/calendar" element={<HearingCalendar />} />
+            <Route path="/library/desk" element={<LibraryDesk />} />
+            <Route path="/microfinance/desk" element={<LoanDesk />} />
+            <Route path="/payroll/desk" element={<PayrollDesk />} />
+            <Route path="/tailoring/board" element={<TailoringBoard />} />
+            <Route path="/travel/desk" element={<TravelDesk />} />
+            <Route path="/weighbridge/desk" element={<WeighbridgeDesk />} />
+            <Route path="/wholesale/loading" element={<WholesaleLoading />} />
             {generatedSystems.map((sys) =>
               sys.entities.map((e) => (
                 <Route key={e.api} path={`/${sys.system}/${e.path}`} element={<CrudPage entity={e} session={session} />} />

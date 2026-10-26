@@ -6,14 +6,14 @@
       "code": "T-HB",
       "name": "Haemoglobin (sample)",
       "sampleType": "BLOOD",
-      "normalRange": "see lab reference (sample)",
+      "normalRange": "13.0-17.0 g/dL (sample)",
       "price": 8.0
     },
     {
       "code": "T-GLU",
       "name": "Fasting glucose (sample)",
       "sampleType": "BLOOD",
-      "normalRange": "see lab reference (sample)",
+      "normalRange": "3.9-5.5 mmol/L (sample)",
       "price": 6.0
     }
   ]

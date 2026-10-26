@@ -4,7 +4,7 @@ Small-business systems (shop till, bookings, clinic, gym, hotel and more) built 
 
 This repository rebuilds, from scratch, the kinds of systems our team has delivered for shops and service businesses. It contains no client code and no client data: every name, product and barcode in the sample data is invented and marked "(sample)".
 
-**Status:** 20 systems on one shared base. Eight have hand-written features on top: **Shop POS**, **Salon and spa booking**, **Clinic prescriptions**, **Gym membership**, **Hotel booking**, **Garment shop**, **Mobile IMEI tracker** and **Bakery**. The other 12 are built entirely by the generator from spec files: they have records, forms, validation, CSV export and an audit trail, but not yet their special features (see [Spec-only systems](#spec-only-systems)).
+**Status:** all 20 systems are complete on one shared base. The generator builds each system's records, forms, validation, CSV export and audit trail from a spec file; every system then has its own hand-written desk screen and business rules on top (till, diary, fees, fines, net weight, loan schedule and so on), each with tests.
 
 | Till screen | Printed receipt (PDF) |
 |---|---|
@@ -17,7 +17,7 @@ This repository rebuilds, from scratch, the kinds of systems our team has delive
 | Part | Tech | What it does |
 |---|---|---|
 | `backend/` | Java 21, Spring Boot 3, Spring Security (JWT), JPA, PostgreSQL | REST API, roles, audit log, PDF receipts, CSV export |
-| `frontend/` | React 18, TypeScript, Vite | Till, salon diary, prescription writer, gym desk, hotel desk, garment till, IMEI desk, bakery counter, record screens |
+| `frontend/` | React 18, TypeScript, Vite | One desk screen per system (till, diary, work list, loading list, weighbridge, loan desk, hearing calendar and others) plus record screens |
 | `tools/generator/` | Python 3.9+ (standard library only) | Builds entity, repository, REST controller and screen definition from a JSON spec |
 | `specs/` | JSON | One spec file per system |
 | `docker-compose.yml` | Docker | Database, API and web app with one command |
@@ -117,8 +117,8 @@ Try a sample barcode on the till: `2000000000084`. On the gym desk, try member c
 
 | Where | What is tested | Command |
 |---|---|---|
-| `backend/src/test` | Every seeded entity of all 20 systems: list and CSV export. POS: money rounding, login, barcode lookup, sale totals, stock, receipt, role rules, generated CRUD and CSV, audit. Salon: overlap, back-to-back, opening hours, free slots, cancel. Clinic: allergy block and override, prescriber role, print. Gym: expiry day, early and late renewal, month ends, frozen and unknown codes. Hotel: double booking, same-day turnover, capacity, check-in and check-out order, invoice. Garment: sale, stock, receipt, exchange once per item. IMEI: check digit, warranty, one open claim. Bakery: shelf life, oldest batch first, expired never sold, write-off role | `cd backend && mvn test` |
-| `frontend/src/lib/*.test.ts` | cart totals, stay nights and totals, renewal dates, IMEI check digit, warranty end, expiry status and exchange difference match the backend numbers | `cd frontend && npm test` |
+| `backend/src/test` | Every seeded entity of all 20 systems: list and CSV export. POS: money rounding, login, barcode lookup, sale totals, stock, receipt, role rules, generated CRUD and CSV, audit. Salon: overlap, back-to-back, opening hours, free slots, cancel. Clinic: allergy block and override, prescriber role, print. Gym: expiry day, early and late renewal, month ends, frozen and unknown codes. Hotel: double booking, same-day turnover, capacity, check-in and check-out order, invoice. Garment: sale, stock, receipt, exchange once per item. IMEI: check digit, warranty, one open claim. Bakery: shelf life, oldest batch first, expired never sold, write-off role. Lab, coaching, library, tailoring, travel, wholesale, weighbridge, construction, housing, payroll, micro-finance and law firm: each rule (`ServiceRulesTest`) and each desk endpoint end to end (`ServiceSystemsApiTest`) | `cd backend && mvn test` |
+| `frontend/src/lib/*.test.ts` | cart totals, stay nights and totals, renewal dates, IMEI check digit, warranty end, expiry status, exchange difference, library fine, tailoring balance, net weight and travel checklist match the backend numbers | `cd frontend && npm test` |
 | `tools/generator/test_generate.py` | generated code shape; bad specs, duplicate entity names and SQL reserved field names rejected; every spec in `specs/` builds | `python3 -m unittest discover -s tools/generator` |
 
 The Docker build runs the backend and frontend tests, so `docker compose up --build` fails if a test fails.
@@ -147,26 +147,68 @@ python3 tools/generator/generate.py          # writes the Java and the screen de
 python3 tools/generator/generate.py --check  # fails if generated files are out of date
 ```
 
+### Diagnostic lab
+
+- Work list of samples not yet reported, oldest first. Status moves collected, in progress, reported; a reported result is final (a correction needs a new order).
+- The result is flagged LOW, NORMAL or HIGH against the test's range (`4.0-11.0`, `< 5.7` or `> 60`); text results get no flag.
+- Printed report (PDF) only after the result is in. Sample ranges are invented; this is not a medical device.
+
+### Coaching centre
+
+- Fee payment for 1 to 12 months with an on-screen receipt. A missed month is still owed, so payment extends from the old paid-until date (unlike the gym).
+- Overdue list with months owed and the amount from the batch's monthly fee.
+
+### Library
+
+- Issue only while a copy is free (copies minus open loans); due in 14 days.
+- Return works out the fine: 0.20 a day after the due date, at most 10.00 a loan. A loan cannot be returned twice. Overdue list with the fine so far.
+
+### Tailoring
+
+- Order board by stage: cutting, stitching, trial, ready. Balance due is price minus advance (never below zero).
+- A ready order is delivered only when the exact balance is paid. Order slip (PDF) with measurements, dates and balance.
+
+### Travel agency
+
+- Checklist per booking: passport, visa (not needed for flight-only bookings; a refusal is shown) and balance.
+- Call list of trips in the next 14 days with something missing. No messages are sent.
+
+### Wholesale distribution
+
+- Loading list per route and date with order count and total; refused if the route does not run on that weekday.
+- Mark all loaded, then delivered per order. Orders move booked, loaded, delivered; only a booked order can be cancelled.
+
+### Mill weighbridge
+
+- Net weight from gross and tare. Refused when tare is 0, gross is not more than tare (swapped weighings) or gross is over the 60,000 kg bridge limit. The screen shows the same check while typing.
+- Numbered slips (`WB-000001` onwards) as an 80 mm PDF, and today's net kg per material.
+
+### Construction materials
+
+- Cost dashboard per site: materials by type (quantity times unit cost), labour (workers times daily rate), share of each and the site total.
+
+### Housing society
+
+- Overdue instalments with days late; mark one paid.
+- Managers allot an available plot or transfer an allotted one. A transfer is refused while that plot has overdue instalments; old and new owner go to the audit log.
+
+### Payroll and attendance
+
+- Check-in works out minutes late and the fine. Sample rules: 10 minutes' grace, then every late minute at the per-minute rate (monthly salary / 26 days / 8 hours); overtime at 1.5 times. One check-in per employee per day.
+- Monthly pay summary: salary, fines, overtime and net. Fines are worked out again from late minutes, so a hand-edited fine cannot drift from the rule.
+
+### Micro-finance
+
+- Statement with the repayment schedule (first instalment one month after the start), each instalment paid, part paid, upcoming or overdue, plus arrears and amount left.
+- A repayment records a late fee of 2% of the arrears when instalments are overdue (sample default). Overpaying is refused; the loan closes when fully repaid.
+
+### Law firm case diary
+
+- Hearing calendar for the next 7, 14 or 30 days with case, court and client.
+- A new date is refused for a decided or closed case, a past date, or a second hearing for the same case on one day.
+- Outcome on or after the hearing day: adjourned (the next date is added) or decided.
+
 Each entity gets a table, validation, REST endpoints under `/api/<system>/<path>`, OpenAPI docs, CSV export, audit entries and a screen in the web app. Hand-written features (like the till) sit beside the generated code.
-
-## Spec-only systems
-
-These systems come only from a file in `specs/` (two or so entities each, with invented sample rows). They show how fast a new system starts on the shared base. The features in the last column are **not built yet**; today they are plain records that staff fill in.
-
-| System | Spec | Records | Not built yet |
-|---|---|---|---|
-| Diagnostic lab | `lab.json` | test list, lab orders and results | analyser interface, printed reports |
-| Coaching centre | `coaching.json` | batches with monthly fee, students | fee receipts, overdue list |
-| Library | `library.json` | books, loans | automatic fine calculation |
-| Tailoring | `tailoring.json` | customer measurements, orders with trial date and advance | balance due, order slips |
-| Travel agency | `travel.json` | bookings with passport and visa status | document checklist, reminders |
-| Wholesale distribution | `wholesale.json` | delivery routes, advance orders | loading lists per route |
-| Mill weighbridge | `weighbridge.json` | weigh slips (gross and tare kg) | weighbridge hardware link, net weight and slip print |
-| Construction materials | `construction.json` | material receipts, labour days | cost dashboard |
-| Housing society | `housing.json` | plots, instalments | transfers, overdue list |
-| Payroll and attendance | `payroll.json` | employees, attendance with late minutes and fines | biometric reader link, fine and overtime rules |
-| Micro-finance | `microfinance.json` | loans, repayments | schedule and penalty calculation |
-| Law firm case diary | `lawfirm.json` | cases, hearings | hearing calendar, document store |
 
 ## Roadmap
 
@@ -177,8 +219,7 @@ Systems with hand-written features on top of the generated base:
 - [x] Clinic prescription writer: allergy warning, printable prescription
 - [x] Gym membership and fees: entry blocked after expiry, fee receipts
 - [x] Hotel booking and check-in: availability, no double booking, invoices
-- [x] The other 15 systems from [masmatixinnovations.co.uk](https://masmatixinnovations.co.uk/#systems) as spec files
-- [ ] Their special features (last column above), added one system at a time
+- [x] The other 15 systems from [masmatixinnovations.co.uk](https://masmatixinnovations.co.uk/#systems), each with its own desk screen and rules
 
 ## Limitations
 
@@ -187,7 +228,9 @@ Systems with hand-written features on top of the generated base:
 - The clinic module is sample software, not a medical device. The allergy check is a plain text match against the patient's recorded allergies; it does not replace a drug database or clinical judgement, and printed prescriptions say they are not valid for dispensing.
 - Salon opening hours (09:00 to 18:00) and the hotel's 30-night limit are constants in code, not settings yet.
 - Receipts are plain sales receipts. They are not certified for any tax authority's e-invoicing scheme.
-- Spec-only systems do not link records to each other yet (for example a loan repayment stores the loan number as text, not a foreign key), and they do no calculations such as fines, net weight or balances.
+- Records in the newer systems link by number or name as text (for example a loan repayment stores the loan number), not by foreign key. Desk lists read whole tables, which is fine for a small business but would need paged queries at scale.
+- Fines, late fees, grace periods, loan periods and the bridge limit are sample defaults in code, not settings yet. Check local law and your own policy before using them.
+- Not built: weighbridge and biometric hardware links, lab analyser interface, document store for the law firm, SMS or WhatsApp reminders.
 - The demo users share one password from `.env`. Change it, and the JWT secret, before any real use.
 
 ## Licence
