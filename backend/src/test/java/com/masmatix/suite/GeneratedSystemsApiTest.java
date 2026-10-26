@@ -20,7 +20,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 /**
  * Every seed file seed/&lt;system&gt;-&lt;path&gt;.json must be reachable at /api/&lt;system&gt;/&lt;path&gt;,
- * list all its sample rows and export CSV. This covers the spec-only systems without one test per system.
+ * list all its sample rows and export CSV. This covers every generated entity without one test per system.
  */
 @SpringBootTest
 @AutoConfigureMockMvc

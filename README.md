@@ -1,5 +1,7 @@
 # Masmatix Business Suite
 
+[![Tests](https://github.com/MHKhan50/masmatix-business-suite/actions/workflows/tests.yml/badge.svg)](https://github.com/MHKhan50/masmatix-business-suite/actions/workflows/tests.yml)
+
 Small-business systems (shop till, bookings, clinic, gym, hotel and more) built on one shared base, by **Masmatix Innovations**.
 
 This repository rebuilds, from scratch, the kinds of systems our team has delivered for shops and service businesses. It contains no client code and no client data: every name, product and barcode in the sample data is invented and marked "(sample)".
@@ -10,7 +12,7 @@ This repository rebuilds, from scratch, the kinds of systems our team has delive
 |---|---|
 | ![Till screen of the Shop POS](docs/images/till.png) | ![Receipt PDF for one cash sale](docs/images/receipt.png) |
 
-*Screenshots from a local run with the invented sample data.*
+*Screenshots from a local run with the invented sample data. More under [Mill weighbridge](#mill-weighbridge).*
 
 ## What is in it
 
@@ -96,57 +98,6 @@ This repository rebuilds, from scratch, the kinds of systems our team has delive
 - Expiry alerts: batches with stock that are expired, on their last day or ending tomorrow.
 - Managers write off what is left of a batch; the quantity and the user go to the audit log.
 
-## Run it
-
-Needs [Docker Desktop](https://www.docker.com/products/docker-desktop/).
-
-```bash
-cp .env.example .env
-# put a real secret in .env:  APP_JWT_SECRET=$(openssl rand -hex 32)
-docker compose up --build
-```
-
-- Web app: http://localhost:3000 (users `admin`, `manager`, `staff`, password = `APP_DEMO_PASSWORD` from `.env`)
-- API docs (OpenAPI / Swagger UI): http://localhost:8080/swagger-ui.html
-
-The first build downloads Maven and npm packages and runs all tests inside the build, so it takes a few minutes.
-
-Try a sample barcode on the till: `2000000000084`. On the gym desk, try member codes `GYM-0001` (active), `GYM-0002` (expired) and `GYM-0003` (frozen). On the IMEI desk, try `000000000000018` (in warranty), `000000000000034` (cover ended) and `000000000000019` (wrong check digit). Sample IMEIs use the `00` prefix, so they do not belong to any real phone. Sample barcodes use the 200 to 299 in-store prefix range, so they do not belong to any real product.
-
-## Tests
-
-| Where | What is tested | Command |
-|---|---|---|
-| `backend/src/test` | Every seeded entity of all 20 systems: list and CSV export. POS: money rounding, login, barcode lookup, sale totals, stock, receipt, role rules, generated CRUD and CSV, audit. Salon: overlap, back-to-back, opening hours, free slots, cancel. Clinic: allergy block and override, prescriber role, print. Gym: expiry day, early and late renewal, month ends, frozen and unknown codes. Hotel: double booking, same-day turnover, capacity, check-in and check-out order, invoice. Garment: sale, stock, receipt, exchange once per item. IMEI: check digit, warranty, one open claim. Bakery: shelf life, oldest batch first, expired never sold, write-off role. Lab, coaching, library, tailoring, travel, wholesale, weighbridge, construction, housing, payroll, micro-finance and law firm: each rule (`ServiceRulesTest`) and each desk endpoint end to end (`ServiceSystemsApiTest`) | `cd backend && mvn test` |
-| `frontend/src/lib/*.test.ts` | cart totals, stay nights and totals, renewal dates, IMEI check digit, warranty end, expiry status, exchange difference, library fine, tailoring balance, net weight and travel checklist match the backend numbers | `cd frontend && npm test` |
-| `tools/generator/test_generate.py` | generated code shape; bad specs, duplicate entity names and SQL reserved field names rejected; every spec in `specs/` builds | `python3 -m unittest discover -s tools/generator` |
-
-The Docker build runs the backend and frontend tests, so `docker compose up --build` fails if a test fails.
-
-## Adding a system with the generator
-
-A system is a JSON file in `specs/`. Example field types: `string`, `text`, `int`, `decimal`, `bool`, `date`, `email`, `phone`, `enum`.
-
-```json
-{
-  "system": "gym",
-  "title": "Gym membership",
-  "entities": [
-    { "name": "Member", "label": "Members", "path": "members",
-      "fields": [
-        { "name": "fullName", "type": "string", "required": true },
-        { "name": "plan", "type": "enum", "values": ["MONTHLY", "ANNUAL"] },
-        { "name": "expiresOn", "type": "date" }
-      ] }
-  ]
-}
-```
-
-```bash
-python3 tools/generator/generate.py          # writes the Java and the screen definition
-python3 tools/generator/generate.py --check  # fails if generated files are out of date
-```
-
 ### Diagnostic lab
 
 - Work list of samples not yet reported, oldest first. Status moves collected, in progress, reported; a reported result is final (a correction needs a new order).
@@ -183,6 +134,12 @@ python3 tools/generator/generate.py --check  # fails if generated files are out 
 - Net weight from gross and tare. Refused when tare is 0, gross is not more than tare (swapped weighings) or gross is over the 60,000 kg bridge limit. The screen shows the same check while typing.
 - Numbered slips (`WB-000001` onwards) as an 80 mm PDF, and today's net kg per material.
 
+![Weighbridge desk with net weight and today's total](docs/images/weighbridge.png)
+
+| Swapped weighings are refused while typing | Printed weigh slip (PDF) |
+|---|---|
+| ![Error shown when gross is less than tare](docs/images/weighbridge-swapped.png) | ![80 mm weigh slip PDF](docs/images/weigh-slip.png) |
+
 ### Construction materials
 
 - Cost dashboard per site: materials by type (quantity times unit cost), labour (workers times daily rate), share of each and the site total.
@@ -208,18 +165,68 @@ python3 tools/generator/generate.py --check  # fails if generated files are out 
 - A new date is refused for a decided or closed case, a past date, or a second hearing for the same case on one day.
 - Outcome on or after the hearing day: adjourned (the next date is added) or decided.
 
+## Run it
+
+Needs [Docker Desktop](https://www.docker.com/products/docker-desktop/).
+
+```bash
+cp .env.example .env
+# put a real secret in .env:  APP_JWT_SECRET=$(openssl rand -hex 32)
+docker compose up --build
+```
+
+- Web app: http://localhost:3000 (users `admin`, `manager`, `staff`, password = `APP_DEMO_PASSWORD` from `.env`)
+- API docs (OpenAPI / Swagger UI): http://localhost:8080/swagger-ui.html
+
+The first build downloads Maven and npm packages and runs all tests inside the build, so it takes a few minutes.
+
+Try a sample barcode on the till: `2000000000084`. On the gym desk, try member codes `GYM-0001` (active), `GYM-0002` (expired) and `GYM-0003` (frozen). On the IMEI desk, try `000000000000018` (in warranty), `000000000000034` (cover ended) and `000000000000019` (wrong check digit). Sample IMEIs use the `00` prefix, so they do not belong to any real phone. Sample barcodes use the 200 to 299 in-store prefix range, so they do not belong to any real product.
+
+## Tests
+
+| Where | What is tested | Command |
+|---|---|---|
+| `backend/src/test` | Every seeded entity of all 20 systems: list and CSV export. POS: money rounding, login, barcode lookup, sale totals, stock, receipt, role rules, generated CRUD and CSV, audit. Salon: overlap, back-to-back, opening hours, free slots, cancel. Clinic: allergy block and override, prescriber role, print. Gym: expiry day, early and late renewal, month ends, frozen and unknown codes. Hotel: double booking, same-day turnover, capacity, check-in and check-out order, invoice. Garment: sale, stock, receipt, exchange once per item. IMEI: check digit, warranty, one open claim. Bakery: shelf life, oldest batch first, expired never sold, write-off role. Lab, coaching, library, tailoring, travel, wholesale, weighbridge, construction, housing, payroll, micro-finance and law firm: each rule (`ServiceRulesTest`) and each desk endpoint end to end (`ServiceSystemsApiTest`) | `cd backend && mvn test` |
+| `frontend/src/lib/*.test.ts` | cart totals, stay nights and totals, renewal dates, IMEI check digit, warranty end, expiry status, exchange difference, library fine, tailoring balance, net weight and travel checklist match the backend numbers | `cd frontend && npm test` |
+| `tools/generator/test_generate.py` | generated code shape; bad specs, duplicate entity names and SQL reserved field names rejected; every spec in `specs/` builds | `python3 -m unittest discover -s tools/generator` |
+
+The Docker build runs the backend and frontend tests, so `docker compose up --build` fails if a test fails. GitHub Actions runs all three test suites on every push.
+
+## Adding a system with the generator
+
+A system is a JSON file in `specs/`. Example field types: `string`, `text`, `int`, `decimal`, `bool`, `date`, `email`, `phone`, `enum`.
+
+```json
+{
+  "system": "gym",
+  "title": "Gym membership",
+  "entities": [
+    { "name": "Member", "label": "Members", "path": "members",
+      "fields": [
+        { "name": "fullName", "type": "string", "required": true },
+        { "name": "plan", "type": "enum", "values": ["MONTHLY", "ANNUAL"] },
+        { "name": "expiresOn", "type": "date" }
+      ] }
+  ]
+}
+```
+
+```bash
+python3 tools/generator/generate.py          # writes the Java and the screen definition
+python3 tools/generator/generate.py --check  # fails if generated files are out of date
+```
+
 Each entity gets a table, validation, REST endpoints under `/api/<system>/<path>`, OpenAPI docs, CSV export, audit entries and a screen in the web app. Hand-written features (like the till) sit beside the generated code.
 
 ## Roadmap
 
-Systems with hand-written features on top of the generated base:
+Done: all 20 systems, each with generated records and a hand-written desk screen with its own rules and tests.
 
-- [x] Shop POS: barcode till, receipts, stock, daily report
-- [x] Salon and spa booking: diary, free slots, no double booking
-- [x] Clinic prescription writer: allergy warning, printable prescription
-- [x] Gym membership and fees: entry blocked after expiry, fee receipts
-- [x] Hotel booking and check-in: availability, no double booking, invoices
-- [x] The other 15 systems from [masmatixinnovations.co.uk](https://masmatixinnovations.co.uk/#systems), each with its own desk screen and rules
+Next:
+- [ ] Settings screen for values that are code constants today (opening hours, fines, grace periods, bridge limit)
+- [ ] Versioned database migrations (Flyway)
+- [ ] Login rate limiting and per-user passwords
+- [ ] Hardware links where a business needs them (weighbridge indicator, biometric reader)
 
 ## Limitations
 
@@ -231,7 +238,7 @@ Systems with hand-written features on top of the generated base:
 - Records in the newer systems link by number or name as text (for example a loan repayment stores the loan number), not by foreign key. Desk lists read whole tables, which is fine for a small business but would need paged queries at scale.
 - Fines, late fees, grace periods, loan periods and the bridge limit are sample defaults in code, not settings yet. Check local law and your own policy before using them.
 - Not built: weighbridge and biometric hardware links, lab analyser interface, document store for the law firm, SMS or WhatsApp reminders.
-- The demo users share one password from `.env`. Change it, and the JWT secret, before any real use.
+- The demo users share one password from `.env`, and login attempts are not rate-limited yet. Change the password and the JWT secret before any real use.
 
 ## Licence
 

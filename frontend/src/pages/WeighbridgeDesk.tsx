@@ -41,7 +41,8 @@ export default function WeighbridgeDesk() {
           <button type="submit" disabled={typeof preview !== "number"}>Save slip</button>
           {last && (
             <p>
-              {last.slip.slipNumber} · {last.slip.vehicleNumber} · net {kg(last.netKg)}{" "}
+              Saved {last.slip.slipNumber} · {last.slip.vehicleNumber} · net {kg(last.netKg)}
+              <br />
               <button type="button" className="ghost" onClick={() => openFile(`/api/weighbridge/desk/slips/${last.slip.id}/slip.pdf`)}>Print slip</button>
             </p>
           )}
