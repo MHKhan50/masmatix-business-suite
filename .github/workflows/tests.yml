@@ -37,11 +37,11 @@ jobs:
 
   generator:
     runs-on: ubuntu-latest
+    # The generator promises Python 3.9+, so test it on 3.9. The runner image no
+    # longer ships 3.9, so use the official Python 3.9 container instead.
+    container: python:3.9-slim
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.9"
       - name: Generator tests and generated files up to date
         run: |
           python -m unittest discover -s tools/generator
